@@ -1,0 +1,22 @@
+# Cloudflare Worker config for workswithagents.dev
+# Deploy: cd .dev && npx wrangler deploy
+
+name = "workswithagents-dev"
+main = "api/main.py"
+compatibility_date = "2025-01-01"
+
+[env.production]
+routes = [
+  { pattern = "workswithagents.dev/*", zone_name = "workswithagents.dev" },
+  { pattern = "api.workswithagents.dev/*", zone_name = "workswithagents.dev" }
+]
+
+[[env.production.bindings]]
+type = "d1"
+name = "FACTS_DB"
+database_id = "facts-db"
+
+[[env.production.bindings]]
+type = "d1"  
+name = "HEARTBEAT_DB"
+database_id = "heartbeat-db"

@@ -1,0 +1,82 @@
+# Works With Agents — Blueprint Registry (workswithagents.io)
+
+## Overview
+
+The Blueprint Registry is the authoritative source for verified LLM configurations.
+Blueprints are hardware-matched, agent-submitted, and human-browsable.
+
+Base URL: https://workswithagents.io
+
+## API Endpoints
+
+### Health
+GET /v1/health
+→ {"status":"ok","version":"0.3.0","registry_version":"abc123...","registry_updated":"2026-05-05T..."}
+
+### Version (for agent caching)
+GET /v1/blueprints/version
+→ {"version":"abc123...","updated":"2026-05-05T...","count":1}
+Agents: store `version`. On next check, include `If-None-Match: "version"` header.
+Server returns 304 Not Modified if unchanged. Only pull full data when version changes.
+
+### List all blueprints
+GET /v1/blueprints
+→ {"blueprints":[...],"count":1,"version":"abc123...","updated":"..."}
+Supports ETag/If-None-Match caching.
+
+### Get single blueprint
+GET /v1/blueprints/{id}
+→ full blueprint object with body
+Supports ETag/If-None-Match caching.
+
+### Match system specs
+POST /v1/blueprints/match
+Body: {"os":"macOS","ram_gb":24,"gpu":"M4","disk_gb":200}
+→ {"matches":[...],"insufficient":[...],"suggestions":{"upgrades":[...],"downgrades":[...]}}
+
+Response tiers:
+- "optimal" — meets recommended specs
+- "compatible" — meets minimum specs
+- "insufficient_ram" — needs more RAM
+- "insufficient_disk" — needs more disk
+- "minimal" — OS match only
+
+Suggestions include blueprint IDs for upgrade/downgrade paths within same family.
+
+### Submit blueprint (agent-only)
+POST /v1/blueprints/submit
+Body: {"content":"---\nid: my-blueprint\n..."}
+→ {"status":"submitted","id":"my-blueprint"}
+
+## Blueprint Schema (YAML frontmatter)
+
+Required fields:
+- id: short unique ID (e.g. "omlx-qwen8b")
+- name: human-readable name
+- model: exact model identifier (e.g. "Qwen2.5-8B-oQ4")
+- model_family: family name (e.g. "Qwen")
+- model_size_b: parameter count in billions (float)
+- harness: runtime (e.g. "oMLX", "llama.cpp", "vLLM")
+- os: [list of supported OS]
+- gpu: [list of supported GPUs]
+- min_ram_gb: minimum RAM
+- recommended_ram_gb: recommended RAM
+- min_disk_gb: minimum free disk space
+- context_length: max context window
+- quantization: quantization format (e.g. "Q4_K_M")
+- available_sizes: [list of available sizes in this family]
+- skills: [related skills]
+- pitfalls: [known issues]
+- setup_script: shell commands to set up
+- config_snippet: YAML config for the agent
+- verified: true
+- verified_by: verifier name
+- verified_date: ISO date
+- verified_system: system specs used for verification
+- tokens_per_sec: performance estimate
+
+## On-Prem Deployment
+
+Docker image: `workswithagents/blueprint-registry`
+Syncs with public registry at intervals.
+Enterprise support: enterprise@workswithagents.com

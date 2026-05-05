@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://workswithagents.co.uk/sitemap.xml

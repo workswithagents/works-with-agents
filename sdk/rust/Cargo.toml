@@ -1,0 +1,14 @@
+[package]
+name = "workswithagents"
+version = "0.1.0"
+edition = "2021"
+description = "Works With Agents — Agent OSI Model Rust SDK"
+license = "CC-BY-4.0"
+repository = "https://github.com/vystartasv/works-with-agents"
+authors = ["Vilius Vystartas <hello@workswithagents.com>"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", features = ["json", "blocking"] }
+hex = "0.4"

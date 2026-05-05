@@ -1,0 +1,39 @@
+<!-- STATUS: Specification — site not yet live. No DNS, no hosting. Lastmod: 2026-05-05 -->
+<!-- LANGUAGE: en (primary). i18n: /{lang}/llms.txt. Canonical: https://workswithagents.co.uk/llms.txt -->
+<!-- THEME: Markdown for AI agents. Human-rendered pages use prefers-color-scheme. -->
+
+# Works With Agents — UK Education
+
+> UK mirror of the Works With Agents education platform. Same 10-pattern methodology, same course.
+> **Status:** Specification. Content planned, not launched.
+> **Full reference:** [llms-full.txt](https://workswithagents.co.uk/llms-full.txt)
+> **Global:** [workswithagents.com/llms.txt](https://workswithagents.com/llms.txt)
+> **API:** [workswithagents.dev/llms.txt](https://workswithagents.dev/llms.txt)
+> Raw Markdown: `Accept: text/markdown`
+
+## Overview
+
+- [About](https://workswithagents.co.uk/index.md): UK mirror. Same 10 patterns. Based in Cardiff.
+- [Founders](https://workswithagents.co.uk/about.md): Vilius & Pelin Vystartas. Cardiff.
+
+## The Methodology
+
+- [10 Patterns](https://workswithagents.co.uk/methodology/overview.md): Boot through Compounding.
+- [Weekend Experiment](https://workswithagents.co.uk/methodology/weekend-experiment.md): 3 days. 111 web parts scaffolded autonomously.
+
+## Courses — Coming Soon
+
+- [Works With Agents: The 10 Patterns](https://workswithagents.co.uk/courses/ten-patterns.md): Flagship course. Self-paced. 10 modules.
+
+*Pricing and launch dates to be announced.*
+
+## Further Resources
+
+- **Global:** [workswithagents.com](https://workswithagents.com/llms.txt)
+- **API:** [workswithagents.dev](https://workswithagents.dev/llms.txt)
+- **Blueprints:** [workswithagents.io](https://workswithagents.io/llms.txt)
+
+## About
+
+**Vilius Vystartas** — Technical founder. Power Platform Architect. Cardiff.
+**Pelin Vystartas** — Co-owner. Business/compliance. Client relationships.

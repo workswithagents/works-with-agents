@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter — Works With Agents</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --border: #334155;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px }
+  .logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none }
+  .logo span { color: var(--accent) }
+  .nav-links { display: flex; gap: 20px; align-items: center }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
+  .nav-links a:hover { color: var(--text) }
+
+  .hero { text-align: center; padding: 20px 0 48px }
+  .hero .badge { display: inline-block; padding: 3px 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px }
+  .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px }
+  .hero h1 .t { color: var(--accent) }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto }
+
+  .section { padding: 48px 0 }
+  .section h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.3px }
+  .section p, .section li { color: var(--muted); font-size: 14px; line-height: 1.7 }
+
+  .signup-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; max-width: 480px; margin: 24px auto; box-shadow: var(--shadow) }
+  .signup-card h3 { font-size: 18px; margin-bottom: 6px }
+  .signup-card p { font-size: 13px; color: var(--muted); margin-bottom: 16px }
+  .signup-card input[type="email"] { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 15px; margin-bottom: 12px }
+  .signup-card input[type="email"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent) }
+  .signup-card button { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer }
+  .signup-card button:hover { opacity: 0.9 }
+  .signup-card .note { font-size: 12px; color: var(--muted); margin-top: 12px; text-align: center }
+  .signup-card .result { margin-top: 12px; padding: 10px; border-radius: 6px; font-size: 13px; text-align: center; display: none }
+  .signup-card .result.success { display: block; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent) }
+  .signup-card .result.error { display: block; background: color-mix(in srgb, #ef4444 10%, transparent); color: #ef4444 }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 24px }
+  .feature { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; box-shadow: var(--shadow) }
+  .feature h4 { font-size: 14px; margin-bottom: 4px }
+  .feature p { font-size: 13px }
+
+  footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 20px; color: var(--muted); font-size: 13px }
+  footer a { color: var(--accent); text-decoration: none }
+  footer a:hover { text-decoration: underline }
+
+  @media (max-width: 640px) { .hero h1 { font-size: 28px } nav { flex-direction: column; gap: 10px } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/learn.html">Learn</a>
+    <a href="/newsletter.html">Newsletter</a>
+    <a href="/about.html">About</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Launching soon</div>
+  <h1>Stay <span class="t">Updated</span></h1>
+  <p>Weekly practical insights on working with AI agents. No hype — just patterns that work.</p>
+</section>
+
+<section class="section">
+  <h2>What You'll Get</h2>
+  <div class="features">
+    <div class="feature">
+      <h4>🧩 One Pattern Per Week</h4>
+      <p>Each issue covers one agentic pattern — skills, memory, autonomy, quality gates. Actionable, not theoretical.</p>
+    </div>
+    <div class="feature">
+      <h4>🔧 Real Configuration Snippets</h4>
+      <p>Copy-paste ready agent configs, decision protocols, and skill templates from real experimentation.</p>
+    </div>
+    <div class="feature">
+      <h4>📊 Behind the Build</h4>
+      <p>What happened when agents were given autonomous infrastructure for a weekend. 111 web parts scaffolded, 5 services, patterns that emerged.</p>
+    </div>
+    <div class="feature">
+      <h4>🎯 Launch Updates</h4>
+      <p>First to know when the course goes live. Early access pricing for subscribers.</p>
+    </div>
+  </div>
+
+  <div class="signup-card">
+    <h3>Join the Newsletter</h3>
+    <p>One email per week. Practical, developer-focused. Unsubscribe anytime.</p>
+    <form id="newsletter-form">
+      <input type="email" id="email" placeholder="you@example.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="note">No spam. No AI hype. Just what works.</p>
+    <div class="result" id="result"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Works With Agents · <a href="/">Home</a> · <a href="/learn.html">Learn</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+
+<script>
+document.getElementById('newsletter-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const result = document.getElementById('result');
+  result.className = 'result';
+  result.textContent = '';
+
+  try {
+    const res = await fetch('http://localhost:8498/v1/newsletter/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      result.className = 'result success';
+      result.textContent = '✓ ' + data.message;
+      document.getElementById('email').value = '';
+    } else {
+      result.className = 'result error';
+      result.textContent = 'Error: ' + (data.detail || 'Please try again.');
+    }
+  } catch (err) {
+    result.className = 'result error';
+    result.textContent = 'Could not connect. Please try again later.';
+  }
+});
+</script>
+
+</body>
+</html>

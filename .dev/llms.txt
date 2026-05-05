@@ -1,0 +1,91 @@
+<!-- lastmod: 2026-05-05 -->
+<!-- LANGUAGE: en (primary). Canonical: https://workswithagents.dev/llms.txt -->
+
+# Works With Agents — Knowledge Platform
+
+> Structured knowledge for AI agents. FactBase, Skill Registry, Pitfall Registry.
+> **Status:** Live. API at workswithagents.dev.
+> **Full reference:** [llms-full.txt](https://workswithagents.dev/llms-full.txt)
+> **OpenAPI:** [v1/openapi.json](https://workswithagents.dev/v1/openapi.json)
+
+## API Reference
+
+Base URL: `https://workswithagents.dev`
+Version: 0.3.0
+
+### Health
+```
+GET /v1/health
+→ {"status":"ok","version":"0.3.0"}
+```
+
+### Version (for on-prem sync)
+```
+GET /v1/version
+→ {"version":"sha256hash","updated":"ISO timestamp"}
+```
+
+### FactBase
+```
+GET /v1/facts?entity=X&category=Y&limit=200
+→ structured facts, queryable by entity/category
+POST /v1/facts
+→ set/upsert a fact
+GET /v1/facts/stats
+→ factbase statistics
+```
+
+### Skills
+```
+GET /v1/skills
+→ list all skills
+GET /v1/skills/{name}
+→ skill metadata + full body
+```
+
+### Pitfalls
+```
+GET /v1/pitfalls?limit=100
+→ query pitfall registry
+POST /v1/pitfalls
+→ report a bug (shared knowledge — bugs found by one, avoided by all)
+```
+
+### Newsletter
+```
+POST /v1/newsletter/subscribe
+→ subscribe to newsletter
+```
+
+### Authentication
+```
+GET /v1/auth/{service}
+→ credential lookup for authorized agents
+```
+
+## On-Prem Deployment
+
+Docker image: `workswithagents/knowledge-platform`
+Set `SYNC_FROM=https://workswithagents.dev` for periodic sync of facts, skills, pitfalls.
+Version endpoint enables efficient diff-based syncing.
+
+Enterprise support: enterprise@workswithagents.com
+
+## Specifications — Agent OSI Model
+
+The 7-layer framework for agent infrastructure. Specifications at each layer:
+
+- [Agent OSI Model](https://workswithagents.dev/specs/agent-osi-model.md) — Full framework (L1-L7)
+- [Agent Capability Manifest](https://workswithagents.dev/specs/capability-manifest.md) — L3 Discovery
+- [Handoff Protocol](https://workswithagents.dev/specs/handoff-protocol.md) — L4 Session (MCP SEP #2683, A2A #1817)
+- [Coordination Protocol](https://workswithagents.dev/specs/coordination-protocol.md) — L5 Coordination
+- [Transaction Protocol](https://workswithagents.dev/specs/transaction-protocol.md) — L7 Governance
+
+All specs: [workswithagents.dev/specs/](https://workswithagents.dev/specs/index.md)
+License: CC BY 4.0
+
+## Ecosystem
+
+- **Education:** [workswithagents.com/llms.txt](https://workswithagents.com/llms.txt)
+- **Blueprint Registry:** [workswithagents.io/llms.txt](https://workswithagents.io/llms.txt)
+- **UK Mirror:** [workswithagents.co.uk/llms.txt](https://workswithagents.co.uk/llms.txt)

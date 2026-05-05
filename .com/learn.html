@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn — Works With Agents</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --border: #334155;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px }
+  .logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none }
+  .logo span { color: var(--accent) }
+  .nav-links { display: flex; gap: 20px; align-items: center }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
+  .nav-links a:hover { color: var(--text) }
+
+  .hero { text-align: center; padding: 20px 0 48px }
+  .hero .badge { display: inline-block; padding: 3px 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px }
+  .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px }
+  .hero h1 .t { color: var(--accent) }
+
+  .section { padding: 48px 0 }
+  .section h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.3px }
+  .section h3 { font-size: 17px; font-weight: 600; margin: 20px 0 6px }
+  .section p, .section li { color: var(--muted); font-size: 14px; line-height: 1.7 }
+
+  .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 12px; margin-top: 20px }
+  .module { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px; box-shadow: var(--shadow); border-left: 3px solid var(--accent) }
+  .module .num { font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px }
+  .module h4 { font-size: 15px; margin-bottom: 4px }
+  .module p { font-size: 13px; color: var(--muted) }
+  .module ul { margin-top: 8px; padding-left: 16px; font-size: 13px; color: var(--muted) }
+
+  .offerings { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 20px }
+  .offering { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px; box-shadow: var(--shadow) }
+  .offering h4 { font-size: 16px; margin-bottom: 4px }
+  .offering .type { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px }
+
+  footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 20px; color: var(--muted); font-size: 13px }
+  footer a { color: var(--accent); text-decoration: none }
+  footer a:hover { text-decoration: underline }
+
+  @media (max-width: 640px) { .hero h1 { font-size: 28px } .modules { grid-template-columns: 1fr } nav { flex-direction: column; gap: 10px } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/learn.html">Learn</a>
+    <a href="/newsletter.html">Newsletter</a>
+    <a href="/about.html">About</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Course in development</div>
+  <h1>What You'll <span class="t">Learn</span></h1>
+</section>
+
+<section class="section">
+  <h2>The 10 Patterns</h2>
+  <p>Each module teaches one pattern. You apply it immediately. Four phases: Foundation → Autonomy → Scale → Harden.</p>
+
+  <div class="modules">
+    <div class="module">
+      <div class="num">Module 1</div>
+      <h4>Boot</h4>
+      <p>First session setup. AGENTS.md, environment configuration, initial memory — everything that makes subsequent sessions work.</p>
+      <ul><li>AGENTS.md as source of truth</li><li>Environment config that sticks</li><li>Initial memory: what the agent needs to know</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 2</div>
+      <h4>Skills</h4>
+      <p>Reusable procedural knowledge your agent loads on demand. Build once, use forever.</p>
+      <ul><li>Creating your first reusable skill</li><li>When to load vs. when to skip</li><li>Skill library organisation</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 3</div>
+      <h4>Memory</h4>
+      <p>Durable context across sessions. Preferences, corrections, facts — remembered. Never re-explain.</p>
+      <ul><li>Session memory vs. durable memory</li><li>Memory architecture patterns</li><li>Search and retrieval</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 4</div>
+      <h4>Decision Protocols</h4>
+      <p>Autonomy without chaos. Rules your agent follows. When to ask, when to decide.</p>
+      <ul><li>The micromanagement trap</li><li>Writing effective decision rules</li><li>Trust calibration over time</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 5</div>
+      <h4>Tool Composition</h4>
+      <p>The right instrument for each task. Terminal vs. files vs. delegation — the difference between 30 seconds and 15 minutes.</p>
+      <ul><li>When to use which tool</li><li>Avoiding tool misuse patterns</li><li>Custom tool configuration</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 6</div>
+      <h4>Orchestration</h4>
+      <p>Multi-agent workflows. Complex work split across specialist agents working in parallel.</p>
+      <ul><li>Role-based agent design</li><li>Parallel vs. sequential delegation</li><li>Managing agent communication</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 7</div>
+      <h4>Pipelines</h4>
+      <p>Agents that run while you sleep. Cron jobs, build pipelines, monitoring — zero human intervention.</p>
+      <ul><li>Scheduled agent workflows</li><li>Build and deploy pipelines</li><li>Pipeline composition</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 8</div>
+      <h4>Resilience</h4>
+      <p>Never-stop loops. Failure recovery with retry, backoff, and self-healing. The agent finds another way.</p>
+      <ul><li>Error categorisation</li><li>Retry strategies</li><li>Self-healing agents</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 9</div>
+      <h4>Verify</h4>
+      <p>Trust but verify. Automated testing + human review cadence. Guardrails that catch problems — and a process for when they don't.</p>
+      <ul><li>Automated tests after every action</li><li>Syntax, linting, type checking</li><li>Human review: cadence, what to look for, when to intervene</li></ul>
+    </div>
+    <div class="module">
+      <div class="num">Module 10</div>
+      <h4>Compounding</h4>
+      <p>The feedback loop. Discoveries become skills. Skills compound. Agents that get better every session.</p>
+      <ul><li>Saving discoveries as skills</li><li>Pattern recognition across sessions</li><li>The compounding maths</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Ways to Learn</h2>
+  <div class="offerings">
+    <div class="offering">
+      <div class="type">Self-Paced</div>
+      <h4>Online Course</h4>
+      <p>10 video modules, downloadable templates, example agent configurations. Lifetime access. Learn at your own pace.</p>
+    </div>
+    <div class="offering">
+      <div class="type">Team</div>
+      <h4>Workshop</h4>
+      <p>2-day intensive. Live hands-on instruction using your team's real projects. Custom agent configurations.</p>
+    </div>
+    <div class="offering">
+      <div class="type">Ongoing</div>
+      <h4>Advisory Retainer</h4>
+      <p>Monthly methodology audit, pipeline optimisation, skill library development. Priority support.</p>
+    </div>
+  </div>
+  <p style="margin-top:20px;color:var(--accent);font-weight:600;font-size:14px">Pricing coming soon. Join the newsletter for launch updates.</p>
+</section>
+
+<footer>
+  <p>Works With Agents · <a href="/">Home</a> · <a href="/newsletter.html">Newsletter</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

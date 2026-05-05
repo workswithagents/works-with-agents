@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="10 patterns for working with AI agents as collaborators with memory, skills, and autonomous decision-making. A practical methodology developed through hands-on experimentation.">
+<meta property="og:title" content="Works With Agents — The Missing Manual for Working with AI Agents">
+<meta property="og:description" content="10 practical patterns for treating AI agents as collaborators. Boot → Skills → Memory → Orchestration → Resilience → Compounding.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://workswithagents.com/">
+<meta property="og:site_name" content="Works With Agents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Works With Agents — The Missing Manual for Working with AI Agents">
+<meta name="twitter:description" content="10 practical patterns for treating AI agents as collaborators. Boot → Skills → Memory → Orchestration → Resilience → Compounding.">
+<link rel="canonical" href="https://workswithagents.com/">
+<title>Works With Agents — The Missing Manual for Working with AI Agents</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --border: #334155;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px }
+  .logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none }
+  .logo span { color: var(--accent) }
+  .nav-links { display: flex; gap: 20px; align-items: center }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
+  .nav-links a:hover { color: var(--text) }
+
+  .hero { text-align: center; padding: 20px 0 48px }
+  .hero .badge { display: inline-block; padding: 3px 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px }
+  .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px }
+  .hero h1 .t { color: var(--accent) }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto }
+
+  .section { padding: 48px 0 }
+  .section h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px }
+  .section > p { color: var(--muted); font-size: 14px; margin-bottom: 24px; max-width: 560px }
+
+  .patterns { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px }
+  .pattern { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; box-shadow: var(--shadow); border-left: 3px solid var(--accent) }
+  .pattern .n { font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px }
+  .pattern h4 { font-size: 14px; margin-bottom: 3px; font-weight: 600 }
+  .pattern p { font-size: 13px; color: var(--muted); line-height: 1.5 }
+
+  footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 20px; color: var(--muted); font-size: 13px }
+  footer a { color: var(--accent); text-decoration: none }
+  footer a:hover { text-decoration: underline }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 16px }
+    .hero h1 { font-size: 26px }
+    .hero p { font-size: 14px }
+    nav { flex-direction: column; gap: 10px; margin-bottom: 32px }
+    .nav-links { flex-wrap: wrap; gap: 12px; justify-content: center }
+    .patterns { grid-template-columns: 1fr }
+    footer { font-size: 12px; padding: 28px 0 }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <a href="#methodology">Methodology</a>
+    <a href="https://workswithagents.io">Blueprints</a>
+    <a href="/about.html">About</a>
+    <a href="https://workswithagents.dev">API</a>
+    <a href="https://workswithagents.co.uk">UK</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Course in development</div>
+  <h1>The Missing Manual for Working with <span class="t">AI Agents</span></h1>
+  <p>10 patterns for treating AI agents as collaborators with memory, skills, and autonomous decision-making. Developed through hands-on experimentation with agent-assisted development.</p>
+</section>
+
+<section class="section" id="methodology">
+  <h2>The 10 Patterns</h2>
+  <p>Every pattern comes from real experimentation — discovered through hands-on agent-assisted development.</p>
+  <div class="patterns">
+    <div class="pattern"><div class="n">01</div><h4>Boot</h4><p>First session setup. AGENTS.md, environment, initial memory.</p></div>
+    <div class="pattern"><div class="n">02</div><h4>Skills</h4><p>Reusable procedural knowledge. Build once, use forever.</p></div>
+    <div class="pattern"><div class="n">03</div><h4>Memory</h4><p>Persistent context across sessions. Never re-explain.</p></div>
+    <div class="pattern"><div class="n">04</div><h4>Decision Protocols</h4><p>Autonomy without chaos. When to ask, when to decide.</p></div>
+    <div class="pattern"><div class="n">05</div><h4>Tool Composition</h4><p>Right tool for each job. Terminal, files, web, delegation.</p></div>
+    <div class="pattern"><div class="n">06</div><h4>Orchestration</h4><p>Multi-agent workflows. Parallel streams, specialist agents.</p></div>
+    <div class="pattern"><div class="n">07</div><h4>Pipelines</h4><p>Agents that run while you sleep. Cron, builds, monitoring.</p></div>
+    <div class="pattern"><div class="n">08</div><h4>Resilience</h4><p>Never-stop loops. Retry with backoff. Self-healing.</p></div>
+    <div class="pattern"><div class="n">09</div><h4>Verify</h4><p>Trust but verify. Automated gates + human review.</p></div>
+    <div class="pattern"><div class="n">10</div><h4>Compounding</h4><p>Agents that get better. Discoveries → skills → forever.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Works With Agents · <a href="https://workswithagents.dev">API</a> · <a href="https://workswithagents.co.uk">UK</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

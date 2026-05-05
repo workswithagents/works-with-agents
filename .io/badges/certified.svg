@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="40" viewBox="0 0 240 40">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="40" rx="6" fill="#0a0a14"/>
+  <rect x="1" y="1" width="238" height="38" rx="5" fill="none" stroke="url(#g)" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="14" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="url(#g)">◆ Works With Agents</text>
+  <text x="142" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#e8e8f0">Certified</text>
+</svg>

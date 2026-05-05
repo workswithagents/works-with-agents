@@ -1,0 +1,414 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Works With Agents API",
+    "version": "1.0.0",
+    "description": "Infrastructure for AI agents: structured facts, skill registry, fleet health, shared pitfalls, agent handoff protocol. Works with any agent framework.\n\n**Status:** Specification — API not yet deployed.\n**Docs:** https://workswithagents.dev/llms.txt\n**Contact:** Vilius Vystartas, Cardiff UK",
+    "contact": {
+      "name": "Works With Agents",
+      "url": "https://workswithagents.dev"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://workswithagents.dev/v1",
+      "description": "Production API (not yet live)"
+    }
+  ],
+  "security": [
+    { "ApiKeyAuth": [] }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "API key in format wwa_<32 hex chars>. Get at https://workswithagents.dev/keys"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "string", "example": "invalid_entity" },
+              "message": { "type": "string", "example": "Entity name must be 1-64 characters" },
+              "details": { "type": "object" }
+            }
+          }
+        }
+      },
+      "Fact": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "Unique fact ID" },
+          "entity": { "type": "string", "description": "What this fact is about (e.g. python, spfx)" },
+          "attribute": { "type": "string", "description": "Property name (e.g. path, version, status)" },
+          "value": { "type": "string", "description": "The fact value" },
+          "category": {
+            "type": "string",
+            "enum": ["env", "preference", "project", "reference", "user_fact", "auth"],
+            "description": "Fact category"
+          },
+          "source": { "type": "string", "description": "Provenance: user, inferred, session_xxx, agent_id" },
+          "verified": {
+            "type": "integer",
+            "enum": [0, 1, 2],
+            "description": "0=unverified, 1=user-confirmed, 2=agent-tested"
+          },
+          "note": { "type": "string", "description": "Optional context" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "FactInput": {
+        "type": "object",
+        "required": ["entity", "attribute", "value", "category"],
+        "properties": {
+          "entity": { "type": "string", "example": "python" },
+          "attribute": { "type": "string", "example": "path" },
+          "value": { "type": "string", "example": "/opt/homebrew/bin/python3.11" },
+          "category": { "type": "string", "enum": ["env", "preference", "project", "reference", "user_fact", "auth"] },
+          "verified": { "type": "integer", "enum": [0, 1, 2], "default": 1 },
+          "note": { "type": "string" }
+        }
+      },
+      "Heartbeat": {
+        "type": "object",
+        "required": ["agent_id", "agent_type", "status"],
+        "properties": {
+          "agent_id": { "type": "string", "description": "Unique agent identifier" },
+          "agent_type": { "type": "string", "description": "hermes, claude-code, codex, copilot, cursor" },
+          "status": { "type": "string", "enum": ["healthy", "degraded", "error", "offline"] },
+          "session_id": { "type": "string" },
+          "task": { "type": "string" },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "uptime_seconds": { "type": "integer" },
+              "tasks_completed": { "type": "integer" },
+              "errors": { "type": "integer" }
+            }
+          }
+        }
+      },
+      "Pitfall": {
+        "type": "object",
+        "required": ["title", "category", "tool", "symptom", "fix"],
+        "properties": {
+          "id": { "type": "integer" },
+          "title": { "type": "string", "example": "SPFx SCSS module resolution failure" },
+          "category": { "type": "string", "enum": ["build", "api", "config", "deployment"] },
+          "tool": { "type": "string", "example": "spfx" },
+          "symptom": { "type": "string" },
+          "fix": { "type": "string" },
+          "discovered_by": { "type": "string", "description": "Agent ID that found this" },
+          "hit_count": { "type": "integer" },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "category": { "type": "string" },
+          "version": { "type": "string" },
+          "author": { "type": "string" },
+          "downloads": { "type": "integer" },
+          "compatible_frameworks": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["hermes", "claude-code", "codex", "copilot", "cursor"] }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/facts": {
+      "get": {
+        "summary": "Query facts",
+        "description": "Query structured facts by entity, attribute, category, or keyword search. Replaces discovery loops — no more 'what Python version?' queries.",
+        "operationId": "queryFacts",
+        "parameters": [
+          { "name": "entity", "in": "query", "schema": { "type": "string" }, "example": "python" },
+          { "name": "attribute", "in": "query", "schema": { "type": "string" }, "example": "path" },
+          { "name": "category", "in": "query", "schema": { "type": "string", "enum": ["env", "preference", "project", "reference", "user_fact", "auth"] } },
+          { "name": "keyword", "in": "query", "schema": { "type": "string" }, "description": "Full-text search across entity, attribute, value, note" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching facts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "facts": { "type": "array", "items": { "$ref": "#/components/schemas/Fact" } },
+                    "count": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "401": { "description": "Invalid API key" },
+          "429": { "description": "Rate limited", "headers": { "Retry-After": { "schema": { "type": "integer" } } } }
+        }
+      },
+      "post": {
+        "summary": "Create or update a fact",
+        "description": "Upserts on (entity, attribute).",
+        "operationId": "setFact",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FactInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created or updated" },
+          "400": { "description": "Validation error", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "401": { "description": "Invalid API key" },
+          "429": { "description": "Rate limited" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a fact",
+        "operationId": "deleteFact",
+        "parameters": [
+          { "name": "entity", "in": "query", "required": true, "schema": { "type": "string" } },
+          { "name": "attribute", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "204": { "description": "Deleted" }
+        }
+      }
+    },
+    "/heartbeat": {
+      "post": {
+        "summary": "Report agent health",
+        "description": "Agent liveness reporting. Powers fleet health dashboard.",
+        "operationId": "reportHeartbeat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Heartbeat" }
+            }
+          }
+        },
+        "responses": {
+          "202": { "description": "Accepted" }
+        }
+      }
+    },
+    "/heartbeat/status": {
+      "get": {
+        "summary": "Fleet health summary",
+        "operationId": "fleetStatus",
+        "responses": {
+          "200": {
+            "description": "Fleet health",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fleet": {
+                      "type": "object",
+                      "properties": {
+                        "total_agents": { "type": "integer" },
+                        "healthy": { "type": "integer" },
+                        "degraded": { "type": "integer" },
+                        "offline": { "type": "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pitfalls": {
+      "get": {
+        "summary": "Query pitfalls",
+        "description": "Shared bug registry. Bugs found by one agent, avoided by all.",
+        "operationId": "queryPitfalls",
+        "parameters": [
+          { "name": "category", "in": "query", "schema": { "type": "string", "enum": ["build", "api", "config", "deployment"] } },
+          { "name": "tool", "in": "query", "schema": { "type": "string" }, "example": "spfx" },
+          { "name": "keyword", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching pitfalls",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pitfalls": { "type": "array", "items": { "$ref": "#/components/schemas/Pitfall" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Report a pitfall",
+        "operationId": "reportPitfall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Pitfall" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Reported" }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "summary": "Search skills",
+        "description": "Public catalog of reusable agent skills.",
+        "operationId": "searchSkills",
+        "parameters": [
+          { "name": "keyword", "in": "query", "schema": { "type": "string" } },
+          { "name": "category", "in": "query", "schema": { "type": "string" } },
+          { "name": "agent_framework", "in": "query", "schema": { "type": "string", "enum": ["hermes", "claude-code", "codex", "copilot", "cursor"] } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching skills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "skills": { "type": "array", "items": { "$ref": "#/components/schemas/Skill" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills/{name}": {
+      "get": {
+        "summary": "Download a skill",
+        "description": "Returns raw SKILL.md content as Markdown.",
+        "operationId": "downloadSkill",
+        "parameters": [
+          { "name": "name", "in": "path", "required": true, "schema": { "type": "string" }, "example": "agentic-delegation" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Skill markdown",
+            "content": {
+              "text/markdown": { "schema": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "/handoff/schema": {
+      "get": {
+        "summary": "Get handoff protocol schema",
+        "parameters": [
+          { "name": "variant", "in": "query", "schema": { "type": "string", "enum": ["baseline", "regulated"] } }
+        ],
+        "responses": {
+          "200": { "description": "JSON Schema for handoff documents" }
+        }
+      }
+    },
+    "/handoff/validate": {
+      "post": {
+        "summary": "Validate a handoff document",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Validation result" }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Facts", "description": "Structured source-of-truth for agent facts" },
+    { "name": "Heartbeat", "description": "Agent liveness and fleet health" },
+    { "name": "Pitfalls", "description": "Shared bug registry" },
+    { "name": "Skills", "description": "Public skill catalog" },
+    { "name": "Handoff", "description": "Agent-to-agent task handoff protocol" }
+  ],
+  "x-metadata": {
+    "status": "specification — API not deployed",
+    "lastmod": "2026-05-05",
+    "language": "en",
+    "i18n_url_pattern": "/{lang}/v1/openapi.json",
+    "theme": {
+      "agent_facing": "Markdown, not rendered",
+      "human_facing": "Light default. Dark via prefers-color-scheme."
+    },
+    "discovery": {
+      "llms_txt": "https://workswithagents.dev/llms.txt",
+      "llms_full_txt": "https://workswithagents.dev/llms-full.txt",
+      "related_domains": {
+        "education": "https://workswithagents.com",
+        "uk_compliance": "https://workswithagents.co.uk"
+      }
+    },
+    "founders": {
+      "technical": "Vilius Vystartas",
+      "business_compliance": "Pelin Vystartas",
+      "location": "Cardiff, UK"
+    },
+    "security": {
+      "tls": "1.3 minimum",
+      "cors": "restricted to known origins",
+      "input_validation": "JSON Schema on all inputs",
+      "sql": "parameterized queries (no injection)",
+      "audit": "all writes logged with key ID, timestamp, IP"
+    },
+    "gdpr": {
+      "role": "data processor",
+      "data_location": "UK/EU only",
+      "deletion": "self-service API, hard delete <30 days",
+      "dpa": "available for Pro+ tiers"
+    },
+    "handoff_rfc": {
+      "primary": "MCP SEP-2133 Extensions",
+      "secondary": "Google A2A Agent-to-Agent Protocol",
+      "long_term": "IETF Internet-Draft"
+    },
+    "roadmap": {
+      "phase1_q2_2026": "Live FactBase API, DNS, GitHub org",
+      "phase2_q3_2026": "Heartbeat, pitfalls, skills, Python SDK",
+      "phase3_q3_q4_2026": "Handoff protocol RFC + endpoints",
+      "phase4_q4_2026_plus": "Courses, workshops, consulting"
+    },
+    "rate_limits": {
+      "free": { "requests_per_minute": 100, "fact_writes_per_minute": 30, "heartbeats_per_minute": 10 },
+      "pro": { "requests_per_minute": 1000, "fact_writes_per_minute": 300, "heartbeats_per_minute": 60 },
+      "team": { "requests_per_minute": 5000, "fact_writes_per_minute": 1000, "heartbeats_per_minute": 200 }
+    }
+  }
+}
