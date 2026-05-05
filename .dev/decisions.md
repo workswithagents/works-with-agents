@@ -105,5 +105,5 @@ If adoption warrants standards-track treatment.
 
 ## Founders
 
-**Vilius Vystartas** — Technical founder. Built Bastion. Power Platform Architect. Cardiff.
+**Vilius Vystartas** — Technical founder. Developed the 10-pattern methodology through agent-assisted development. Building the Local Agent Foundry. Power Platform Architect. Cardiff.
 **Pelin Kayhan** — Co-owner. Business operations, compliance, client relationships. Non-technical.
