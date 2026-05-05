@@ -1,12 +1,28 @@
 {
-  "name": "workswithagents",
+  "name": "@workswithagents/agent-foundry",
   "version": "0.1.0",
-  "description": "Works With Agents — Agent OSI Model TypeScript SDK",
+  "description": "Works With Agents — TypeScript SDK for agent identity, trust, compliance, and fleet management",
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "files": ["src/"],
-  "keywords": ["ai", "agents", "infrastructure", "trust", "compliance", "identity"],
+  "files": [
+    "src/"
+  ],
+  "keywords": [
+    "ai",
+    "agents",
+    "infrastructure",
+    "trust",
+    "compliance",
+    "identity",
+    "agent-foundry"
+  ],
   "license": "CC-BY-4.0",
-  "repository": "https://github.com/vystartasv/works-with-agents",
-  "author": "Vilius Vystartas <hello@workswithagents.com>"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vystartasv/works-with-agents.git"
+  },
+  "author": "Works With Agents <hello@workswithagents.com>",
+  "publishConfig": {
+    "access": "public"
+  }
 }
