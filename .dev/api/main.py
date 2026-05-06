@@ -226,6 +226,7 @@ def home():
   .learn-menu .phase-label:first-child{padding-top:4px}
   .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-left:8px}.tag-knowledge{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}.tag-ops{background:color-mix(in srgb,var(--cta) 15%,transparent);color:var(--cta)}
   footer{text-align:center;padding:24px 0 0;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:13px}footer a{color:var(--accent)}
+  @media(max-width:640px){nav{flex-direction:column;gap:10px;margin-bottom:24px}.nav-links{flex-wrap:wrap;gap:12px;justify-content:center}h1{font-size:22px}.card{padding:16px}.endpoint{font-size:11px;padding:4px 8px}.container{padding:0 12px}}
 </style>
 <body><div class="container">
 <nav>

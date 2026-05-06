@@ -393,7 +393,7 @@ def landing():
   .docker-section{{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-top:40px;box-shadow:var(--shadow)}}
   .docker-section h2{{font-size:18px;margin-bottom:6px}}.docker-section p{{font-size:13px;color:var(--muted);margin-bottom:12px}}
   app-footer{{text-align:center;padding:40px 0;border-top:1px solid var(--border);margin-top:40px;color:var(--muted);font-size:13px}}app-footer a{{color:var(--accent);text-decoration:none}}
-  @media(max-width:640px){{.filters{{flex-direction:column}}nav{{flex-direction:column;gap:10px}}}}
+  @media(max-width:640px){{.filters{{flex-direction:column}}nav{{flex-direction:column;gap:10px;margin-bottom:24px}}.nav-links{{flex-wrap:wrap;gap:12px;justify-content:center}}h1{{font-size:22px}}.container{{padding:0 12px}}}}
 </style>
 </head>
 <body><div class="container">
