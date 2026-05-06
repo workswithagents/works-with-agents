@@ -158,9 +158,54 @@ GDPR_RULES = [
     }
 ]
 
+# ─── FCA (Financial Conduct Authority) Rules ────────────────────────────
+
+FCA_RULES = [
+    {
+        "id": "FCA.SMR-1",
+        "name": "Senior Managers Regime — accountability",
+        "severity": "critical",
+        "validation": [
+            {"field": "accountable_person", "operator": "exists",
+             "message": "Every agent action must have an accountable SMF holder (Senior Managers Regime)"}
+        ]
+    },
+    {
+        "id": "FCA.CON-1",
+        "name": "Consumer Duty — fair outcomes",
+        "severity": "high",
+        "validation": [
+            {"field": "consumer_impact", "operator": "not_in",
+             "value": ["adverse", "unfair", "discriminatory"],
+             "message": "Agent actions must not produce unfair consumer outcomes (Consumer Duty 2023)"}
+        ],
+        "trigger": {"events": ["recommend", "price", "deny", "classify"]}
+    },
+    {
+        "id": "FCA.SYG-1",
+        "name": "SYSC — systems and controls",
+        "severity": "high",
+        "validation": [
+            {"field": "audit_logged", "operator": "equals", "value": True,
+             "message": "All automated decisions must be audit-logged (SYSC 4.1.1)"}
+        ],
+        "trigger": {"events": ["decide", "approve", "reject", "classify"]}
+    },
+    {
+        "id": "FCA.OPS-1",
+        "name": "Operational resilience",
+        "severity": "high",
+        "validation": [
+            {"field": "sla_breach", "operator": "not_in", "value": [True],
+             "message": "SLA breaches on important business services must be reported (PS21/3)"}
+        ]
+    },
+]
+
 COMPLIANCE_PACKS = {
     "nhs_dtac": RegulationPack("NHS DTAC", NHS_DTAC_RULES),
     "gdpr": RegulationPack("GDPR", GDPR_RULES),
+    "fca": RegulationPack("FCA", FCA_RULES),
 }
 
 

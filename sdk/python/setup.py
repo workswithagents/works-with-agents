@@ -9,7 +9,7 @@ setup(
     name="workswithagents",
     version="0.1.0",
     description="Works With Agents — Agent OSI Model Python SDK",
-    long_description="Agent OSI Model Python SDK — Trust Score, Deployment, SLA, Identity, Compliance, Onboarding. Zero dependencies beyond stdlib. CC BY 4.0.",
+    long_description="Agent OSI Model Python SDK — Trust Score, Deployment, SLA, Identity, Compliance, Onboarding, IACP, Economics, Reputation. + ASFS Converter + Compliance Proxy. Zero dependencies beyond stdlib. CC BY 4.0.",
     long_description_content_type="text/plain",
     author="Vilius Vystartas",
     author_email="hello@workswithagents.com",
