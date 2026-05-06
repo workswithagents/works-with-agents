@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Integrity Auditor — Works With Agents</title>
+<meta name="description" content="One-click API integrity audit across all Works With Agents domains. Validate health, schema, version consistency. Export reports in JSON, PDF, or print.">
+<meta property="og:title" content="API Integrity Auditor — Works With Agents">
+<meta property="og:description" content="One-click audit across all 5 Works With Agents domains. Validate endpoints, schema, version consistency.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://workswithagents.com/tools/api-auditor.html">
+<meta property="og:site_name" content="Works With Agents">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://workswithagents.com/tools/api-auditor.html">
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --cta: #D97706; --border: #e2e8f0; --red: #ef4444;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --cta: #F59E0B; --border: #334155;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 32px }
+  .logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none }
+  .logo span { color: var(--accent) }
+  .nav-links { display: flex; gap: 20px; align-items: center }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
+
+  .hero { text-align: center; padding: 12px 0 32px }
+  .hero .badge { display: inline-block; padding: 3px 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px }
+  .hero h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.4px; margin-bottom: 8px }
+  .hero h1 span { color: var(--accent) }
+  .hero p { color: var(--muted); font-size: 14px; max-width: 560px; margin: 0 auto }
+
+  .controls { display: flex; gap: 12px; align-items: center; justify-content: center; margin: 24px 0; flex-wrap: wrap }
+  .controls label { font-size: 13px; color: var(--muted) }
+  .controls select, .controls input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); color: var(--text); font-size: 13px }
+  .btn { padding: 10px 28px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; transition: opacity .2s }
+  .btn-primary { background: var(--accent); color: #fff }
+  .btn-primary:hover { opacity: 0.9 }
+  .btn-outline { background: var(--card); color: var(--accent); border: 1px solid var(--accent) }
+  .btn-outline:hover { background: color-mix(in srgb, var(--accent) 5%, var(--card)) }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed }
+
+  .progress { text-align: center; color: var(--muted); font-size: 13px; margin: 12px 0; display: none }
+  .progress.active { display: block }
+
+  .summary { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0 }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 24px; box-shadow: var(--shadow); text-align: center; min-width: 100px }
+  .stat-card .val { font-size: 28px; font-weight: 800; letter-spacing: -0.5px }
+  .stat-card .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px }
+  .val.pass { color: var(--accent) }
+  .val.fail { color: var(--red) }
+
+  .domain-section { margin: 24px 0 }
+  .domain-header { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); margin-bottom: 8px }
+  .domain-header h3 { font-size: 15px; font-weight: 700 }
+  .domain-header .domain-status { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px }
+  .domain-status.ok { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent) }
+  .domain-status.err { background: color-mix(in srgb, var(--red) 15%, transparent); color: var(--red) }
+
+  .results-table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-size: 13px; box-shadow: var(--shadow) }
+  .results-table th { background: var(--bg); color: var(--muted); font-weight: 600; padding: 10px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px }
+  .results-table td { padding: 10px 14px; border-top: 1px solid var(--border) }
+  .results-table .method { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px }
+  .results-table .method.GET { color: var(--accent) }
+  .results-table .path { font-family: 'SF Mono', SFMono-Regular, Consolas, monospace; font-size: 12px }
+  .results-table .status { font-weight: 600 }
+  .results-table .status.s200 { color: var(--accent) }
+  .results-table .status.s404 { color: var(--cta) }
+  .results-table .status.s0 { color: var(--red) }
+  .result-icon { font-size: 14px }
+  .result-icon.pass { color: var(--accent) }
+  .result-icon.fail { color: var(--red) }
+
+  .report-actions { display: flex; gap: 10px; justify-content: center; margin: 24px 0; flex-wrap: wrap }
+  .report-actions .btn { font-size: 12px; padding: 8px 18px }
+
+  .version-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; margin: 16px 0; display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; box-shadow: var(--shadow) }
+  .version-box strong { color: var(--text) }
+  .version-box span { color: var(--muted); margin-left: 6px }
+
+  .hidden { display: none }
+
+  footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 32px; color: var(--muted); font-size: 13px }
+  footer a { color: var(--accent); text-decoration: none }
+
+  .learn-dropdown{position:relative;display:inline-block}
+  .learn-btn{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
+  .learn-btn:hover{color:var(--text)}
+  .learn-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:200px;z-index:50;padding:8px 0}
+  .learn-dropdown:hover .learn-menu{display:block}
+  .learn-menu a{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}
+  .learn-menu a:hover{background:var(--code-bg,var(--card));color:var(--text)}
+  .learn-menu .phase-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);padding:8px 16px 4px;opacity:0.7}
+  .learn-menu .phase-label:first-child{padding-top:4px}
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 22px }
+    nav { flex-direction: column; gap: 10px }
+    .nav-links { flex-wrap: wrap; gap: 12px; justify-content: center }
+    .container { padding: 0 12px }
+    .results-table { font-size: 11px }
+    .results-table td, .results-table th { padding: 6px 8px }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <div class="learn-dropdown">
+      <a href="/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="/learn/boot.html">1. Boot</a><a href="/learn/skills.html">2. Skills</a><a href="/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="/learn/decision-protocols.html">4. Decision Protocols</a><a href="/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="/learn/orchestration.html">6. Orchestration</a><a href="/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="/learn/resilience.html">8. Resilience</a><a href="/learn/verify.html">9. Verify</a><a href="/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
+    <a href="/standards.html">Standards</a>
+    <a href="https://workswithagents.io">Blueprints</a>
+    <a href="/about.html">About</a>
+    <a href="https://workswithagents.dev">API</a>
+    <a href="https://workswithagents.co.uk">UK</a>
+    <a href="https://bastiongateway.com">Bastion</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Integrity Audit</div>
+  <h1>API <span>Auditor</span></h1>
+  <p>One-click audit across all 5 Works With Agents domains. Validate endpoints, schema, and version consistency. Works on-prem and in the cloud.</p>
+</section>
+
+<div class="controls">
+  <label>Mode:</label>
+  <select id="mode">
+    <option value="cloud">Cloud (Production)</option>
+    <option value="local">Local (On-Prem)</option>
+  </select>
+  <button class="btn btn-primary" id="btn-audit" onclick="runAudit()">▶ Audit All</button>
+</div>
+
+<div class="progress" id="progress">Running audit...</div>
+
+<div class="hidden" id="results-section">
+  <div class="summary" id="summary"></div>
+  <div class="version-box hidden" id="versions"></div>
+  <div class="report-actions">
+    <button class="btn btn-outline" onclick="downloadJSON()">📄 Download JSON</button>
+    <button class="btn btn-outline" onclick="downloadPDF()">📋 Download PDF</button>
+    <button class="btn btn-outline" onclick="window.print()">🖨 Print Report</button>
+  </div>
+  <div id="domain-results"></div>
+</div>
+
+<footer>
+  <p>Works With Agents · <a href="https://workswithagents.io">Blueprints</a> · <a href="https://workswithagents.dev">API</a> · <a href="https://workswithagents.co.uk">UK</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+
+<script>
+const ENDPOINTS = {
+  "workswithagents.com": {
+    static: true,
+    cloud: "https://workswithagents.com",
+    local: "http://localhost:8484",
+    endpoints: [
+      {method:"GET",path:"/",expect:{status:200}},
+      {method:"GET",path:"/learn.html",expect:{status:200}},
+      {method:"GET",path:"/about.html",expect:{status:200}},
+      {method:"GET",path:"/standards.html",expect:{status:200}},
+      {method:"GET",path:"/newsletter.html",expect:{status:200}},
+      {method:"GET",path:"/contact.html",expect:{status:200}},
+      {method:"GET",path:"/llms.txt",expect:{status:200}},
+      {method:"GET",path:"/robots.txt",expect:{status:200}},
+      {method:"GET",path:"/sitemap.xml",expect:{status:200}},
+      {method:"GET",path:"/404-should-404",expect:{status:404}},
+    ]
+  },
+  "workswithagents.co.uk": {
+    static: true,
+    cloud: "https://workswithagents.co.uk",
+    local: "http://localhost:8485",
+    endpoints: [
+      {method:"GET",path:"/",expect:{status:200}},
+      {method:"GET",path:"/llms.txt",expect:{status:200}},
+      {method:"GET",path:"/robots.txt",expect:{status:200}},
+      {method:"GET",path:"/sitemap.xml",expect:{status:200}},
+      {method:"GET",path:"/learn.html",expect:{status:404}},
+    ]
+  },
+  "workswithagents.dev": {
+    static: false,
+    cloud: "https://workswithagents.dev",
+    local: "http://localhost:8499",
+    endpoints: [
+      {method:"GET",path:"/v1/health",validate:"health"},
+      {method:"GET",path:"/v1/facts",validate:"facts"},
+      {method:"GET",path:"/v1/facts/stats",validate:"object"},
+      {method:"GET",path:"/v1/skills",validate:"skills"},
+      {method:"GET",path:"/v1/pitfalls",validate:"pitfalls"},
+      {method:"GET",path:"/llms.txt"},
+      {method:"GET",path:"/llms-full.txt"},
+      {method:"GET",path:"/v1/openapi.json",validate:"openapi"},
+    ]
+  },
+  "workswithagents.io": {
+    static: false,
+    cloud: "https://workswithagents.io",
+    local: "http://localhost:8500",
+    endpoints: [
+      {method:"GET",path:"/v1/health",validate:"health"},
+      {method:"GET",path:"/v1/blueprints",validate:"blueprints"},
+      {method:"GET",path:"/v1/blueprints/version",validate:"version"},
+    ]
+  },
+  "bastiongateway.com": {
+    static: false,
+    cloud: "https://bastiongateway.com",
+    local: "http://localhost:8498",
+    endpoints: [
+      {method:"GET",path:"/v1/health",validate:"health"},
+      {method:"GET",path:"/v1/fleet/health",validate:"fleet"},
+      {method:"GET",path:"/"},
+    ]
+  },
+};
+
+let auditResults = null;
+
+function validateHealth(data) {
+  const issues = [], discoveries = {};
+  if (!data.status) issues.push("missing 'status'");
+  else if (data.status !== "ok") issues.push(`status='${data.status}' (expected 'ok')`);
+  if (data.version) discoveries.api_version = data.version;
+  else issues.push("missing 'version'");
+  if (!data.timestamp) issues.push("missing 'timestamp'");
+  if (data.registry_version) discoveries.registry_version = data.registry_version;
+  return { valid: issues.length === 0, issues, discoveries };
+}
+
+function validateWrapped(key) {
+  return function(data) {
+    if (typeof data !== 'object' || Array.isArray(data)) return {valid:false,issues:[`expected object`],discoveries:{}};
+    if (!data[key]) return {valid:false,issues:[`missing '${key}'`],discoveries:{}};
+    if (!Array.isArray(data[key])) return {valid:false,issues:[`'${key}' should be array`],discoveries:{}};
+    return {valid:true,issues:[],discoveries:{count:data[key].length}};
+  };
+}
+
+const VALIDATORS = {
+  health: validateHealth,
+  object: d => ({valid:typeof d==='object'&&!Array.isArray(d),issues:[],discoveries:{}}),
+  array: d => ({valid:Array.isArray(d),issues:[],discoveries:{count:Array.isArray(d)?d.length:0}}),
+  openapi: d => {
+    const issues = [];
+    if (!d.openapi) issues.push("missing 'openapi'");
+    if (!d.info) issues.push("missing 'info'");
+    return {valid:issues.length===0,issues,discoveries:{openapi_spec:d.openapi,info_version:d.info?.version}};
+  },
+  fleet: d => {
+    const issues = [];
+    ['agents','counts','timestamp'].forEach(k => { if (!(k in d)) issues.push(`missing '${k}'`); });
+    return {valid:issues.length===0,issues,discoveries:d.counts?{fleet_counts:d.counts}:{}};
+  },
+  version: d => {
+    const issues = [];
+    if (!d.version) issues.push("missing 'version'");
+    if (!d.count && d.count !== 0) issues.push("missing 'count'");
+    return {valid:issues.length===0,issues,discoveries:{version:d.version,count:d.count}};
+  },
+  facts: validateWrapped("facts"),
+  skills: validateWrapped("skills"),
+  pitfalls: validateWrapped("pitfalls"),
+  blueprints: validateWrapped("blueprints"),
+};
+
+async function fetchEndpoint(method, url) {
+  const start = performance.now();
+  try {
+    const resp = await fetch(url, { method, headers: { 'Accept': 'application/json, text/html, */*' } });
+    const body = await resp.text();
+    const latency = Math.round(performance.now() - start);
+    return { status: resp.status, body, latency_ms: latency, error: null };
+  } catch (e) {
+    return { status: 0, body: '', latency_ms: Math.round(performance.now() - start), error: e.message };
+  }
+}
+
+async function runAudit() {
+  const mode = document.getElementById('mode').value;
+  const btn = document.getElementById('btn-audit');
+  const progress = document.getElementById('progress');
+  const resultsSection = document.getElementById('results-section');
+  
+  btn.disabled = true;
+  progress.classList.add('active');
+  resultsSection.classList.add('hidden');
+  auditResults = [];
+
+  for (const [domain, config] of Object.entries(ENDPOINTS)) {
+    const base = mode === 'local' ? config.local : config.cloud;
+    progress.textContent = `Auditing ${domain}...`;
+    await new Promise(r => setTimeout(r, 0));
+
+    for (const ep of config.endpoints) {
+      const url = `${base}${ep.path}`;
+      const resp = await fetchEndpoint(ep.method, url);
+      
+      const result = {
+        domain, method: ep.method, path: ep.path, url,
+        status: resp.status, latency_ms: resp.latency_ms, error: resp.error,
+        passed: false, issues: [], discoveries: {}
+      };
+
+      const expStatus = ep.expect?.status || 200;
+      if (resp.status !== expStatus) {
+        if (!resp.error || resp.status !== expStatus) result.issues.push(`status ${resp.status} (expected ${expStatus})`);
+      }
+      if (resp.error && resp.status !== expStatus) result.issues.push(resp.error);
+
+      if (ep.validate && resp.status === 200 && !resp.error) {
+        try {
+          const data = JSON.parse(resp.body);
+          const v = VALIDATORS[ep.validate] ? VALIDATORS[ep.validate](data) : {valid:true,issues:[],discoveries:{}};
+          result.issues.push(...v.issues);
+          result.discoveries = v.discoveries;
+          if (!v.valid) result.issues.push(`schema: ${ep.validate}`);
+        } catch (e) {
+          result.issues.push(`invalid JSON: ${e.message}`);
+        }
+      }
+
+      result.passed = result.issues.length === 0;
+      auditResults.push(result);
+    }
+  }
+
+  progress.classList.remove('active');
+  btn.disabled = false;
+  renderResults();
+}
+
+function renderResults() {
+  const total = auditResults.length;
+  const passed = auditResults.filter(r => r.passed).length;
+  const failed = total - passed;
+  const health = failed === 0 ? 'PASS' : 'FAIL';
+
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-card"><div class="val ${failed ? 'fail' : 'pass'}">${total}</div><div class="label">Endpoints</div></div>
+    <div class="stat-card"><div class="val pass">${passed}</div><div class="label">Passed</div></div>
+    <div class="stat-card"><div class="val ${failed ? 'fail' : ''}">${failed}</div><div class="label">Failed</div></div>
+    <div class="stat-card"><div class="val ${health === 'PASS' ? 'pass' : 'fail'}">${health}</div><div class="label">Health</div></div>
+  `;
+
+  // Version box
+  const versions = {};
+  auditResults.forEach(r => {
+    if (r.discoveries.api_version) {
+      const v = r.discoveries.api_version;
+      if (!versions[r.domain]) versions[r.domain] = v;
+      else if (versions[r.domain] !== v) versions[r.domain] += ` / ${v} (MISMATCH)`;
+    }
+  });
+  const vbox = document.getElementById('versions');
+  if (Object.keys(versions).length) {
+    vbox.classList.remove('hidden');
+    vbox.innerHTML = Object.entries(versions).map(([d,v]) => 
+      `<div><strong>${d}</strong><span>v${v}</span></div>`).join('');
+  }
+
+  // Per-domain tables
+  const domains = [...new Set(auditResults.map(r => r.domain))];
+  let html = '';
+  domains.forEach(domain => {
+    const domainResults = auditResults.filter(r => r.domain === domain);
+    const dp = domainResults.filter(r => r.passed).length;
+    const df = domainResults.length - dp;
+    const avgLat = Math.round(domainResults.reduce((s,r) => s + r.latency_ms, 0) / domainResults.length);
+    
+    html += `<div class="domain-section">
+      <div class="domain-header">
+        <h3>${domain}</h3>
+        <span class="domain-status ${df ? 'err' : 'ok'}">${dp}/${domainResults.length} · ${avgLat}ms</span>
+      </div>
+      <table class="results-table">
+        <tr><th></th><th>Method</th><th>Path</th><th>Status</th><th>Latency</th><th>Details</th></tr>`;
+    
+    domainResults.forEach(r => {
+      const icon = r.passed ? '✓' : '✗';
+      const sc = r.status === 200 ? 's200' : (r.status === 404 ? 's404' : (r.status === 0 ? 's0' : ''));
+      const details = r.issues.length ? r.issues.join('; ') : (r.discoveries.count !== undefined ? `${r.discoveries.count} items` : (r.discoveries.api_version ? `v${r.discoveries.api_version}` : ''));
+      html += `<tr>
+        <td class="result-icon ${r.passed ? 'pass' : 'fail'}">${icon}</td>
+        <td class="method ${r.method}">${r.method}</td>
+        <td class="path">${r.path}</td>
+        <td class="status ${sc}">${r.status}</td>
+        <td>${r.latency_ms}ms</td>
+        <td style="font-size:12px;color:var(--muted)">${details}</td>
+      </tr>`;
+    });
+    html += '</table></div>';
+  });
+
+  document.getElementById('domain-results').innerHTML = html;
+  document.getElementById('results-section').classList.remove('hidden');
+}
+
+function downloadJSON() {
+  if (!auditResults) return;
+  const report = {
+    audit_id: new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
+    mode: document.getElementById('mode').value,
+    timestamp: new Date().toISOString(),
+    summary: {
+      total: auditResults.length,
+      passed: auditResults.filter(r=>r.passed).length,
+      failed: auditResults.filter(r=>!r.passed).length,
+      health: auditResults.filter(r=>!r.passed).length===0?'PASS':'FAIL',
+    },
+    results: auditResults
+  };
+  const blob = new Blob([JSON.stringify(report, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `api-audit-${report.audit_id}.json`;
+  a.click();
+}
+
+function downloadPDF() {
+  if (!auditResults) return;
+  const report = {
+    audit_id: new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
+    mode: document.getElementById('mode').value,
+    timestamp: new Date().toISOString(),
+    summary: {
+      total: auditResults.length,
+      passed: auditResults.filter(r=>r.passed).length,
+      failed: auditResults.filter(r=>!r.passed).length,
+      health: auditResults.filter(r=>!r.passed).length===0?'PASS':'FAIL',
+    },
+    results: auditResults
+  };
+  
+  // Generate simple PDF via print-to-PDF
+  const w = window.open('', '_blank');
+  const mode = report.mode;
+  const s = report.summary;
+  w.document.write(`<!DOCTYPE html><html><head><title>API Audit — ${report.audit_id}</title>
+<style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;color:#0f172a}
+h1{font-size:22px;margin-bottom:4px}h1 span{color:#059669}
+.meta{color:#64748b;font-size:13px;margin-bottom:20px}
+.summary{display:flex;gap:16px;margin-bottom:24px}
+.stat{padding:12px 20px;border:1px solid #e2e8f0;border-radius:8px;text-align:center}
+.stat .v{font-size:24px;font-weight:800}.stat .l{font-size:11px;color:#64748b;text-transform:uppercase}
+.v.g{color:#059669}.v.r{color:#ef4444}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#f8fafc;color:#64748b;font-weight:600;padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase}
+td{padding:8px 12px;border-top:1px solid #e2e8f0}
+.pass{color:#059669}.fail{color:#ef4444}footer{color:#64748b;font-size:11px;margin-top:32px;border-top:1px solid #e2e8f0;padding-top:12px}
+</style></head><body>
+<h1>API Integrity Audit — <span>${report.audit_id}</span></h1>
+<div class="meta">Mode: ${mode} · ${report.timestamp}</div>
+<div class="summary">
+<div class="stat"><div class="v">${s.total}</div><div class="l">Endpoints</div></div>
+<div class="stat"><div class="v g">${s.passed}</div><div class="l">Passed</div></div>
+<div class="stat"><div class="v ${s.failed?'r':''}">${s.failed}</div><div class="l">Failed</div></div>
+<div class="stat"><div class="v ${s.health==='PASS'?'g':'r'}">${s.health}</div><div class="l">Health</div></div>
+</div>
+<table><tr><th></th><th>Domain</th><th>Method</th><th>Path</th><th>Status</th><th>Latency</th></tr>`);
+  report.results.forEach(r => {
+    w.document.write(`<tr><td class="${r.passed?'pass':'fail'}">${r.passed?'✓':'✗'}</td><td>${r.domain}</td><td>${r.method}</td><td style="font-family:monospace">${r.path}</td><td>${r.status}</td><td>${r.latency_ms}ms</td></tr>`);
+  });
+  w.document.write(`</table><footer>Works With Agents — API Integrity Auditor — Generated ${report.timestamp}</footer></body></html>`);
+  w.document.close();
+  setTimeout(() => w.print(), 500);
+}
+</script>
+
+</body>
+</html>
