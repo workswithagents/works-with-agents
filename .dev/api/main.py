@@ -237,7 +237,7 @@ def home():
   </div>
 </nav>
 
-  <div class="badge">Knowledge platform — live on HTTPS</div>
+  <div class="badge">15 open specifications · CC BY 4.0</div>
   <h1>Knowledge <span class="t">Platform</span></h1>
   <p style="color:var(--muted);font-size:14px;margin-bottom:24px">15 open specifications for AI agent interoperability. Knowledge API, FactBase, Skill Registry, SDKs. CC BY 4.0.</p>
 
