@@ -36,6 +36,15 @@
   .nav-links { display: flex; gap: 20px; align-items: center }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
   .nav-links a:hover { color: var(--text) }
+  .learn-dropdown { position:relative; display:inline-block }
+  .learn-btn { color:var(--accent); text-decoration:none; font-size:13px; font-weight:600 }
+  .learn-btn:hover { color:var(--text) }
+  .learn-menu { display:none; position:absolute; top:100%; left:0; background:var(--card); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:200px; z-index:50; padding:8px 0 }
+  .learn-dropdown:hover .learn-menu { display:block }
+  .learn-menu a { display:block; padding:6px 16px; color:var(--muted); font-size:12px; text-decoration:none; white-space:nowrap }
+  .learn-menu a:hover { background:var(--code-bg, var(--card)); color:var(--text) }
+  .learn-menu .phase-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent); padding:8px 16px 4px; opacity:0.7 }
+  .learn-menu .phase-label:first-child { padding-top:4px }
 
   article { padding: 0 0 48px }
   article time { font-size: 13px; color: var(--muted); display: block; margin-bottom: 8px }
@@ -82,7 +91,25 @@
 <nav>
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
-    <a href="/#methodology">Methodology</a>
+    <div class="learn-dropdown">
+      <a href="/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="/learn/boot.html">1. Boot</a>
+        <a href="/learn/skills.html">2. Skills</a>
+        <a href="/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="/learn/decision-protocols.html">4. Decision Protocols</a>
+        <a href="/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="/learn/orchestration.html">6. Orchestration</a>
+        <a href="/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="/learn/resilience.html">8. Resilience</a>
+        <a href="/learn/verify.html">9. Verify</a>
+        <a href="/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
     <a href="/standards.html">Standards</a>
     <a href="https://workswithagents.io">Blueprints</a>
     <a href="/about.html">About</a>

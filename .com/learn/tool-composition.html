@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tool Composition — Works With Agents</title>
+<meta name="description" content="Pattern 5: Tool Composition. The right instrument for each task. The difference between 30 seconds and 15 minutes.">
+<meta property="og:title" content="Tool Composition — Works With Agents">
+<meta property="og:description" content="The right instrument for each task. The difference between 30 seconds and 15 minutes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://workswithagents.com/learn/tool-composition.html">
+<meta property="og:site_name" content="Works With Agents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tool Composition — Works With Agents">
+<meta name="twitter:description" content="The right instrument for each task. The difference between 30 seconds and 15 minutes.">
+<link rel="canonical" href="https://workswithagents.com/learn/tool-composition.html">
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --cta: #D97706; --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06); --code-bg: #f1f5f9;
+    --phase-foundation: #059669; --phase-autonomy: #D97706; --phase-scale: #7c3aed; --phase-harden: #dc2626;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --cta: #F59E0B; --border: #334155; --code-bg: #0f172a;
+      --phase-foundation: #10B981; --phase-autonomy: #F59E0B; --phase-scale: #a78bfa; --phase-harden: #f87171;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased }
+  .container { max-width:780px; margin:0 auto; padding:0 24px }
+
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; margin-bottom:32px; flex-wrap:wrap; gap:10px }
+  .logo { font-size:16px; font-weight:700; color:var(--text); text-decoration:none }
+  .logo span { color:var(--accent) }
+  .nav-links { display:flex; gap:18px; align-items:center; flex-wrap:wrap }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:13px; font-weight:500 }
+  .nav-links a:hover { color:var(--text) }
+  .learn-dropdown { position:relative; display:inline-block }
+  .learn-btn { color:var(--accent); text-decoration:none; font-size:13px; font-weight:600; cursor:pointer; background:none; border:none; font-family:inherit }
+  .learn-btn:hover { color:var(--text) }
+  .learn-menu { display:none; position:absolute; top:100%; left:0; background:var(--card); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:200px; z-index:10; padding:8px 0 }
+  .learn-dropdown:hover .learn-menu { display:block }
+  .learn-menu a { display:block; padding:6px 16px; color:var(--muted); font-size:12px; text-decoration:none; white-space:nowrap }
+  .learn-menu a:hover { background:var(--code-bg); color:var(--text) }
+  .learn-menu .phase-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent); padding:8px 16px 4px; opacity:0.7 }
+  .learn-menu .phase-label:first-child { padding-top:4px }
+
+  .breadcrumb { font-size:12px; color:var(--muted); margin-bottom:20px }
+  .breadcrumb a { color:var(--accent); text-decoration:none }
+  .phase-tag { display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; margin-bottom:8px }
+  .phase-tag.foundation { background:color-mix(in srgb, var(--phase-foundation) 12%, transparent); color:var(--phase-foundation) }
+  .phase-tag.autonomy { background:color-mix(in srgb, var(--phase-autonomy) 12%, transparent); color:var(--phase-autonomy) }
+  .phase-tag.scale { background:color-mix(in srgb, var(--phase-scale) 12%, transparent); color:var(--phase-scale) }
+  .phase-tag.harden { background:color-mix(in srgb, var(--phase-harden) 12%, transparent); color:var(--phase-harden) }
+
+  h1 { font-size:32px; font-weight:800; letter-spacing:-0.4px; margin-bottom:6px }
+  .subtitle { color:var(--muted); font-size:15px; margin-bottom:8px }
+  .meta { font-size:12px; color:var(--muted); margin-bottom:28px }
+  .meta span { margin-right:16px }
+
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:20px; box-shadow:var(--shadow) }
+  .card h2 { font-size:18px; margin-bottom:14px }
+  .card h3 { font-size:16px; margin:18px 0 8px }
+
+  .wrong { border-left:3px solid var(--cta) }
+  .wrong p { font-size:14px; color:var(--muted); font-style:italic }
+
+  .vocab dt { font-weight:600; color:var(--text); margin-top:12px; font-size:14px }
+  .vocab dt:first-child { margin-top:0 }
+  .vocab dd { color:var(--muted); font-size:13px; margin-left:0; margin-bottom:6px; line-height:1.6 }
+
+  .resources li { font-size:13px; line-height:2 }
+  .resources a { color:var(--accent); text-decoration:none; font-weight:500 }
+  .resources a:hover { text-decoration:underline }
+
+  .code-block { background:var(--code-bg); border:1px solid var(--border); border-radius:8px; padding:16px; margin:12px 0; overflow-x:auto }
+  .code-block pre { font-family:'SF Mono',SFMono-Regular,Consolas,monospace; font-size:12px; line-height:1.6; color:var(--text) }
+
+  .lesson p, .lesson li { font-size:14px; color:var(--text); line-height:1.8 }
+  .lesson ul, .lesson ol { padding-left:20px; margin:8px 0 }
+  .lesson li { margin-bottom:4px }
+  .highlight { background:color-mix(in srgb, var(--cta) 8%, transparent); border-left:3px solid var(--cta); padding:12px 16px; border-radius:0 8px 8px 0; margin:16px 0; font-weight:600 }
+
+  .prev-next-row { display:flex; justify-content:space-between; margin:32px 0; padding:16px 0; border-top:1px solid var(--border) }
+  .prev-next { color:var(--accent); text-decoration:none; font-weight:600; font-size:14px }
+  .prev-next:hover { text-decoration:underline }
+
+  footer { text-align:center; padding:40px 0; border-top:1px solid var(--border); margin-top:20px; color:var(--muted); font-size:13px }
+  footer a { color:var(--accent); text-decoration:none }
+
+  @media (max-width:640px) { h1 { font-size:26px } nav { flex-direction:column } .prev-next-row { flex-direction:column; gap:8px } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <div class="learn-dropdown">
+      <a href="/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="/learn/boot.html">1. Boot</a>
+        <a href="/learn/skills.html">2. Skills</a>
+        <a href="/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="/learn/decision-protocols.html">4. Decision Protocols</a>
+        <a href="/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="/learn/orchestration.html">6. Orchestration</a>
+        <a href="/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="/learn/resilience.html">8. Resilience</a>
+        <a href="/learn/verify.html">9. Verify</a>
+        <a href="/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
+    <a href="/standards.html">Standards</a>
+    <a href="https://workswithagents.io">Blueprints</a>
+    <a href="/about.html">About</a>
+    <a href="https://workswithagents.dev">API</a>
+    <a href="https://workswithagents.co.uk">UK</a>
+    <a href="https://bastiongateway.com">Bastion</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="/learn.html">Learn</a> / <strong>Tool Composition</strong>
+</div>
+
+<span class="phase-tag autonomy">Autonomy</span>
+<h1>Pattern 5: Tool Composition</h1>
+<p class="subtitle">The right instrument for each task. The difference between 30 seconds and 15 minutes.</p>
+<p class="meta">
+  <span>⏱ 15 min read</span>
+  <span>🛠 Immediate — decisions every session</span>
+  <span>📋 Prerequisites: Patterns 1-4</span>
+</p>
+
+<div class="card wrong">
+  <h2>What Most People Do Wrong</h2>
+  <p>They delegate everything to sub-agents. Every code change becomes a delegate_task. Result: 600-second timeouts, garbage output, and a context window full of sub-agent summaries. Or they do the opposite: run everything through terminal. cat to read files, sed to edit. Ten shell commands where one write_file would do.</p>
+</div>
+
+<div class="card lesson">
+  <h2>The Lesson</h2>
+  <h3>The Tool Decision Matrix</h3>
+<div class="code-block"><pre>Task              | Right tool      | Wrong tool       | Cost of wrong
+Read a file       | read_file       | cat in terminal  | No line numbers, no pagination
+Search code       | search_files    | grep -r          | Slower, no fuzzy matching
+Edit a file       | patch           | sed or rewrite   | Regex failures, overwrites
+Create a file     | write_file      | echo >>          | Escaping bugs, no syntax check
+Run a command     | terminal        | N/A              | This IS the right tool
+Long computation | execute_code    | Multiple terminals| Context pollution
+Research          | web_search      | terminal curl    | Manual browsing, no synthesis
+Parallel work     | delegate_task   | Sequential       | 3x slower
+Complex reasoning | Direct analysis | delegate_task    | Sub-agent has no context</pre></div>
+
+<h3>The Golden Rule</h3>
+<p class="highlight">Never delegate coding to a sub-agent.</p>
+<p>Sub-agents have no memory of your conversation. They don't know your project structure, conventions, or corrections. They generate entire files instead of targeted edits. The result: overwritten working code, invented directories, and output that needs complete rewrites.</p>
+<p>For coding: use write_file, patch, and terminal directly. Sub-agents are for research, parallel analysis, and reasoning-heavy tasks — not code generation.</p>
+
+<h3>When to Use delegate_task</h3>
+<ul>
+<li><strong>Yes:</strong> Research topic A and B in parallel, code review, deep analysis of a separate codebase, synthesizing information from multiple sources</li>
+<li><strong>No:</strong> Writing code, editing files, running tests, anything that needs your project context, any single-step operation</li>
+</ul>
+</div>
+
+<div class="card vocab">
+  <h2>Vocabulary</h2>
+  <dl><dt>Tool set</dt><dd>The collection of capabilities an agent has — terminal, file operations, web search, code execution, delegation. Each has a specific purpose.</dd><dt>Tool misuse</dt><dd>Using the wrong tool for a task: terminal sed instead of patch, cat instead of read_file, delegate_task for a single file write.</dd><dt>Delegation</dt><dd>Spawning sub-agents for complex subtasks. Good for parallel research and code review. Bad for code generation (sub-agents have no context).</dd><dt>Tool budget</dt><dd>The total number of tool calls per turn — each call costs tokens and time. Composing tools efficiently saves both.</dd></dl>
+</div>
+
+<div class="card resources">
+  <h2>Resources</h2>
+  <ul><li><a href="https://workswithagents.dev/specs/tool-composition.md">Tool Composition spec</a></li><li><a href="https://workswithagents.dev/v1/skills/spike">Spike skill</a></li><li><a href="https://workswithagents.dev/v1/skills/agentic-delegation">Agentic Delegation skill</a></li><li><a href="https://workswithagents.io">Blueprint Registry</a></li></ul>
+</div>
+
+<div class="prev-next-row">
+  <a href="decision-protocols.html" class="prev-next">← Decision Protocols</a>
+  <a href="orchestration.html" class="prev-next">Orchestration →</a>
+</div>
+
+<footer>
+  <p>Works With Agents · <a href="https://workswithagents.io">Blueprints</a> · <a href="https://workswithagents.dev">API</a> · <a href="https://workswithagents.co.uk">UK</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

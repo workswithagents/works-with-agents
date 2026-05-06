@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learn — Works With Agents</title>
-<meta name="description" content="Free online course: 10 patterns for working with AI agents. Foundation → Autonomy → Scale → Harden. Vocabulary, resources, and exercises per module.">
+<meta name="description" content="Free online course: 10 patterns for working with AI agents. Each module includes vocabulary, curated resources, and hands-on exercises. Foundation → Autonomy → Scale → Harden.">
 <meta property="og:title" content="Learn — Works With Agents">
 <meta property="og:description" content="Free 10-module course teaching practical patterns for working with AI agents. Each module includes vocabulary, curated resources, and hands-on exercises.">
 <meta property="og:type" content="website">
@@ -32,25 +32,27 @@
   body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased }
   .container { max-width: 900px; margin: 0 auto; padding: 0 24px }
 
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-bottom: 48px; flex-wrap: wrap; gap: 10px }
   .logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none }
   .logo span { color: var(--accent) }
-  .nav-links { display: flex; gap: 20px; align-items: center }
+  .nav-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
   .nav-links a:hover { color: var(--text) }
+  .learn-dropdown { position:relative; display:inline-block }
+  .learn-btn { color:var(--accent); text-decoration:none; font-size:13px; font-weight:600 }
+  .learn-btn:hover { color:var(--text) }
+  .learn-menu { display:none; position:absolute; top:100%; left:0; background:var(--card); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:200px; z-index:50; padding:8px 0 }
+  .learn-dropdown:hover .learn-menu { display:block }
+  .learn-menu a { display:block; padding:6px 16px; color:var(--muted); font-size:12px; text-decoration:none; white-space:nowrap }
+  .learn-menu a:hover { background:var(--code-bg, #f1f5f9); color:var(--text) }
+  .learn-menu .phase-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent); padding:8px 16px 4px; opacity:0.7 }
+  .learn-menu .phase-label:first-child { padding-top:4px }
 
   .hero { text-align: center; padding: 20px 0 48px }
   .hero .badge { display: inline-block; padding: 3px 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px }
   .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px }
   .hero h1 .t { color: var(--accent) }
   .hero p { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0 auto 24px }
-
-  .start-box { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 24px 28px; margin: 0 auto 48px; max-width: 660px; text-align: center; box-shadow: var(--shadow) }
-  .start-box h3 { font-size: 17px; margin-bottom: 8px }
-  .start-box p { font-size: 13px; color: var(--muted); margin-bottom: 12px }
-  .start-box .steps { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap }
-  .start-box .step { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--muted); min-width: 130px; text-align: center }
-  .start-box .step strong { display: block; color: var(--text); font-size: 14px; margin-bottom: 4px }
 
   .phase-header { margin: 40px 0 16px; padding: 12px 0; border-bottom: 1px solid var(--border) }
   .phase-header h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; display: flex; align-items: center; gap: 10px }
@@ -61,27 +63,25 @@
   .phase-dot.harden { background: var(--phase-harden) }
   .phase-header .range { font-size: 13px; color: var(--muted); font-weight: 400 }
 
-  .module { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; box-shadow: var(--shadow) }
-  .module-top { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px }
-  .module-num { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; min-width: 72px; padding-top: 3px }
-  .module h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px }
-  .module .oneliner { font-size: 13px; color: var(--muted); line-height: 1.5 }
-  .module-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px }
-  .module .vocab, .module .resources, .module .learn { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px }
-  .module-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 8px }
-  .vocab dl { font-size: 12px; line-height: 1.6 }
-  .vocab dt { font-weight: 600; color: var(--text); margin-top: 6px }
-  .vocab dt:first-child { margin-top: 0 }
-  .vocab dd { color: var(--muted); margin-left: 0; margin-bottom: 4px }
-  .resources ul, .learn ul { font-size: 12px; line-height: 1.8; padding-left: 16px; color: var(--muted) }
-  .resources a, .learn a { color: var(--accent); text-decoration: none; font-weight: 500 }
-  .resources a:hover, .learn a:hover { text-decoration: underline }
+  .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 12px; margin-top: 20px }
+  .module { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; box-shadow: var(--shadow); transition: border-color 0.15s; display: block; text-decoration: none; color: inherit }
+  .module:hover { border-color: var(--accent) }
+  .module .num { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px }
+  .module h4 { font-size: 16px; margin-bottom: 4px; color: var(--text) }
+  .module p { font-size: 13px; color: var(--muted); line-height: 1.5 }
+  .module ul { margin-top: 8px; padding-left: 16px; font-size: 12px; color: var(--muted) }
+
+  .start-box { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 24px 28px; margin: 0 auto 48px; max-width: 660px; text-align: center; box-shadow: var(--shadow) }
+  .start-box h3 { font-size: 17px; margin-bottom: 8px }
+  .start-box p { font-size: 13px; color: var(--muted); margin-bottom: 12px }
+  .start-box .steps { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap }
+  .start-box .step { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--muted); min-width: 130px; text-align: center }
+  .start-box .step strong { display: block; color: var(--text); font-size: 14px; margin-bottom: 4px }
 
   .bonus-section { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border) }
   .bonus-section h2 { font-size: 18px; margin-bottom: 16px }
-
   .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px }
-  .bonus { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: var(--shadow) }
+  .bonus { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; box-shadow: var(--shadow) }
   .bonus h4 { font-size: 15px; margin-bottom: 6px }
   .bonus p { font-size: 13px; color: var(--muted); line-height: 1.5 }
 
@@ -89,20 +89,13 @@
   .cta-section h3 { font-size: 18px; margin-bottom: 8px }
   .cta-section p { font-size: 13px; color: var(--muted); margin-bottom: 16px }
   .cta-section .cta-link { display: inline-block; padding: 10px 28px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px }
-  .cta-section .cta-link:hover { opacity: 0.9 }
 
   footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 20px; color: var(--muted); font-size: 13px }
   footer a { color: var(--accent); text-decoration: none }
-  footer a:hover { text-decoration: underline }
 
   @media (max-width: 700px) {
-    .hero h1 { font-size: 28px }
-    .module-grid { grid-template-columns: 1fr }
-    .bonus-grid { grid-template-columns: 1fr }
-    nav { flex-direction: column; gap: 10px }
-    .start-box .steps { flex-direction: column }
-    .module-top { flex-direction: column; gap: 4px }
-    .module-num { min-width: auto }
+    .hero h1 { font-size: 28px } .modules { grid-template-columns: 1fr } .bonus-grid { grid-template-columns: 1fr }
+    nav { flex-direction: column } .start-box .steps { flex-direction: column }
   }
 </style>
 </head>
@@ -112,7 +105,25 @@
 <nav>
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
-    <a href="/#methodology">Methodology</a>
+    <div class="learn-dropdown">
+      <a href="/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="/learn/boot.html">1. Boot</a>
+        <a href="/learn/skills.html">2. Skills</a>
+        <a href="/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="/learn/decision-protocols.html">4. Decision Protocols</a>
+        <a href="/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="/learn/orchestration.html">6. Orchestration</a>
+        <a href="/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="/learn/resilience.html">8. Resilience</a>
+        <a href="/learn/verify.html">9. Verify</a>
+        <a href="/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
     <a href="/standards.html">Standards</a>
     <a href="https://workswithagents.io">Blueprints</a>
     <a href="/about.html">About</a>
@@ -125,7 +136,7 @@
 <section class="hero">
   <div class="badge">Free &amp; Open</div>
   <h1>The Missing Manual for<br>Working with AI <span class="t">Agents</span></h1>
-  <p>10 patterns. Self-paced. Each module includes vocabulary, curated resources, and hands-on exercises. No login required — just start reading.</p>
+  <p>10 patterns. Self-paced. Click any module for the full lesson — vocabulary, step-by-step instructions, curated resources, and exercises.</p>
 </section>
 
 <div class="start-box">
@@ -139,425 +150,104 @@
   </div>
 </div>
 
-<!-- PHASE 1: Foundation -->
 <div class="phase-header">
   <h2><span class="phase-dot foundation"></span> Phase 1 — Foundation <span class="range">Modules 1–3</span></h2>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 1</div>
-    <div>
-      <h3>Boot</h3>
-      <p class="oneliner">First session setup. What must be in place before you type a single prompt.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>AGENTS.md</dt><dd>A project-level file that tells the agent about your codebase, conventions, and constraints — the agent's source of truth.</dd>
-        <dt>System prompt</dt><dd>Instructions injected at the start of every conversation that define the agent's personality, boundaries, and capabilities.</dd>
-        <dt>Environment config</dt><dd>Persistent settings (model, tools, working directory) that survive across sessions.</dd>
-        <dt>Initial memory</dt><dd>Durable facts seeded before the first session — language versions, project structure, user preferences.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/v1/skills/boot">Boot skill reference</a> — canonical setup checklist</li>
-        <li><a href="/#methodology">Methodology overview</a> — how the 10 patterns fit together</li>
-        <li><a href="https://workswithagents.dev/llms.txt">Knowledge Platform</a> — agent-discoverable API docs</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Writing an AGENTS.md that actually helps the agent</li>
-      <li>Configuring environment variables that persist across sessions</li>
-      <li>Seeding initial memory so the agent never asks "what version of Python?"</li>
-    </ul>
-  </div>
+<div class="modules">
+  <a href="/learn/boot.html" class="module">
+    <div class="num">Module 1 · 15 min read</div>
+    <h4>Boot</h4>
+    <p>First session setup. The AGENTS.md template that makes every subsequent session faster. What to seed before you type a single prompt.</p>
+    <ul><li>AGENTS.md as source of truth</li><li>Environment config that sticks</li><li>Initial memory seeding</li></ul>
+  </a>
+  <a href="/learn/skills.html" class="module">
+    <div class="num">Module 2 · 18 min read</div>
+    <h4>Skills</h4>
+    <p>Reusable procedural knowledge. Build once, use forever. The skill template that turns discoveries into permanent capabilities.</p>
+    <ul><li>Creating your first skill</li><li>Trigger keywords</li><li>Skill library growth</li></ul>
+  </a>
+  <a href="/learn/memory.html" class="module">
+    <div class="num">Module 3 · 14 min read</div>
+    <h4>Memory</h4>
+    <p>Durable context across sessions. What to save, what to let go. The memory architecture that means you never re-explain.</p>
+    <ul><li>Session vs. durable memory</li><li>Fact architecture</li><li>Memory rules</li></ul>
+  </a>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 2</div>
-    <div>
-      <h3>Skills</h3>
-      <p class="oneliner">Reusable procedural knowledge. Build once, load on demand.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Skill</dt><dd>A markdown document containing step-by-step instructions, pitfalls, and verification steps — loaded by the agent when a task matches its triggers.</dd>
-        <dt>Skill library</dt><dd>A directory of reusable skills shared across agents and projects.</dd>
-        <dt>Trigger keyword</dt><dd>Words or phrases that cause the agent to auto-load a skill (e.g. "deploy" → deploy skill).</dd>
-        <dt>Skill authoring</dt><dd>The craft of writing a skill that another agent (or human) can follow without assumptions.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/v1/skills">Skill Registry</a> — browse published skills</li>
-        <li><a href="https://workswithagents.dev/specs/skill-spec.md">Skill specification</a> — authoring format</li>
-        <li>Example skills: <a href="https://workswithagents.dev/v1/skills/spfx-local">spfx-local</a>, <a href="https://workswithagents.dev/v1/skills/systematic-debugging">systematic-debugging</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Creating your first reusable skill</li>
-      <li>When to load a skill vs. when to skip</li>
-      <li>Organising a skill library for teams</li>
-    </ul>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 3</div>
-    <div>
-      <h3>Memory</h3>
-      <p class="oneliner">Durable context across sessions. Preferences, corrections, facts — remembered. Never re-explain.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Session memory</dt><dd>Context that exists only within the current conversation — lost when the session ends.</dd>
-        <dt>Durable memory</dt><dd>Persistent storage that survives across sessions and agent restarts.</dd>
-        <dt>Fact</dt><dd>A single atomic piece of knowledge (entity-attribute-value) stored in the fact base.</dd>
-        <dt>Memory compaction</dt><dd>Periodic summarisation of long conversations to stay within context limits without losing important detail.</dd>
-        <dt>Honcho</dt><dd>A dialectic memory layer that observes conversations and builds structured peer profiles over time.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/v1/facts">FactBase API</a> — query and store facts</li>
-        <li><a href="https://workswithagents.dev/specs/memory-architecture.md">Memory architecture spec</a></li>
-        <li>Pattern: <a href="/#methodology">Memory — the agent that remembers</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>What to save vs. what to let go</li>
-      <li>Memory architecture: facts, preferences, corrections</li>
-      <li>Search and retrieval patterns across sessions</li>
-    </ul>
-  </div>
-</div>
-
-<!-- PHASE 2: Autonomy -->
 <div class="phase-header">
   <h2><span class="phase-dot autonomy"></span> Phase 2 — Autonomy <span class="range">Modules 4–5</span></h2>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 4</div>
-    <div>
-      <h3>Decision Protocols</h3>
-      <p class="oneliner">Autonomy without chaos. Rules your agent follows. When to ask, when to decide.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Decision protocol</dt><dd>A rule that tells the agent when to proceed autonomously and when to pause for human approval.</dd>
-        <dt>Micromanagement trap</dt><dd>The pattern of over-approving — the human becomes a bottleneck because the agent asks permission for everything.</dd>
-        <dt>Trust calibration</dt><dd>The process of starting with tight constraints (always ask) and loosening over time as the agent proves reliable.</dd>
-        <dt>Destructive guard</dt><dd>A protocol that requires explicit approval for irreversible actions (deploy, delete, email external).</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/decision-protocols.md">Decision Protocols spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/pitfalls?tool=decision">Decision protocol pitfalls</a> — common mistakes</li>
-        <li><a href="https://workswithagents.io">Blueprint Registry</a> — verified agent configs with built-in protocols</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Writing effective decision rules that don't create bottlenecks</li>
-      <li>Trust calibration: start tight, loosen over time</li>
-      <li>When to ask vs. when to decide — the framework</li>
-    </ul>
-  </div>
+<div class="modules">
+  <a href="/learn/decision-protocols.html" class="module">
+    <div class="num">Module 4 · 12 min read</div>
+    <h4>Decision Protocols</h4>
+    <p>Autonomy without chaos. Rules your agent follows. When to ask, when to decide — the autonomy spectrum.</p>
+    <ul><li>The micromanagement trap</li><li>Protocol template</li><li>Trust calibration</li></ul>
+  </a>
+  <a href="/learn/tool-composition.html" class="module">
+    <div class="num">Module 5 · 15 min read</div>
+    <h4>Tool Composition</h4>
+    <p>The right instrument for each task. Tool decision matrix — the difference between 30 seconds and 15 minutes.</p>
+    <ul><li>When to use which tool</li><li>The Golden Rule: never delegate coding</li><li>Tool misuse patterns</li></ul>
+  </a>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 5</div>
-    <div>
-      <h3>Tool Composition</h3>
-      <p class="oneliner">The right instrument for each task. The difference between 30 seconds and 15 minutes.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Tool set</dt><dd>The collection of capabilities an agent has — terminal, file operations, web search, code execution, delegation.</dd>
-        <dt>Tool misuse</dt><dd>Using the wrong tool for a task (e.g. terminal sed instead of patch, cat instead of read).</dd>
-        <dt>Delegation</dt><dd>Spawning sub-agents for complex subtasks — parallel execution, isolated context.</dd>
-        <dt>Tool budget</dt><dd>The total number of tool calls an agent can make per turn — composes with cost and latency constraints.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/tool-composition.md">Tool Composition spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/spike">Spike skill</a> — throwaway experiments pattern</li>
-        <li><a href="https://workswithagents.dev/v1/skills/agentic-delegation">Agentic Delegation</a> — multi-agent handoff protocol</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>When to use terminal vs. file operations vs. delegation</li>
-      <li>Avoiding tool misuse patterns that waste tokens and time</li>
-      <li>Building the right defaults for your tech stack</li>
-    </ul>
-  </div>
-</div>
-
-<!-- PHASE 3: Scale -->
 <div class="phase-header">
   <h2><span class="phase-dot scale"></span> Phase 3 — Scale <span class="range">Modules 6–7</span></h2>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 6</div>
-    <div>
-      <h3>Orchestration</h3>
-      <p class="oneliner">Multi-agent workflows. Complex work split across specialist agents working in parallel.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Orchestrator</dt><dd>A parent agent that decomposes tasks and spawns specialist sub-agents — coordinates results.</dd>
-        <dt>Specialist agent</dt><dd>A focused agent with a narrow role: researcher, builder, reviewer, documentor.</dd>
-        <dt>Parallel delegation</dt><dd>Running multiple sub-agents simultaneously on independent subtasks.</dd>
-        <dt>Handoff</dt><dd>The protocol for passing work and context between agents — what information travels with the task.</dd>
-        <dt>Agent mesh</dt><dd>A persistent network of agents that communicate via a shared state layer (SQLite+WAL, message bus).</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/orchestration.md">Orchestration spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/agent-orchestrator">Agent Orchestrator skill</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/agent-state-db">Agent State DB</a> — shared state for agent meshes</li>
-        <li><a href="https://bastiongateway.com">Bastion Gateway</a> — fleet health monitoring</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>When one agent isn't enough — recognising orchestration signals</li>
-      <li>Role-based agent design (researcher, builder, reviewer)</li>
-      <li>Managing agent communication and handoffs</li>
-    </ul>
-  </div>
+<div class="modules">
+  <a href="/learn/orchestration.html" class="module">
+    <div class="num">Module 6 · 16 min read</div>
+    <h4>Orchestration</h4>
+    <p>Multi-agent workflows. Specialist agents in parallel. Role-based design, handoffs, and the agent mesh pattern.</p>
+    <ul><li>When one agent isn't enough</li><li>Role-based design</li><li>Parallel vs. sequential</li></ul>
+  </a>
+  <a href="/learn/pipelines.html" class="module">
+    <div class="num">Module 7 · 15 min read</div>
+    <h4>Pipelines</h4>
+    <p>Agents that run while you sleep. Cron jobs, webhooks, pipeline chains, and watchdogs that only fire when something breaks.</p>
+    <ul><li>Pipeline pattern</li><li>Common pipeline types</li><li>Pipeline chains</li></ul>
+  </a>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 7</div>
-    <div>
-      <h3>Pipelines</h3>
-      <p class="oneliner">Agents that run while you sleep. Scheduled, event-driven, unattended.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Cron job</dt><dd>A scheduled agent invocation — runs at a fixed time or interval with a self-contained prompt.</dd>
-        <dt>Pipeline composition</dt><dd>Chaining multiple agents together where the output of one feeds the input of the next.</dd>
-        <dt>Watchdog</dt><dd>A monitoring agent that checks system health and alerts only when something is wrong.</dd>
-        <dt>Webhook trigger</dt><dd>Event-driven agent invocation via HTTP POST — runs when an external system signals.</dd>
-        <dt>Delivery target</dt><dd>Where pipeline output lands — Telegram, Discord, email, or local file.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/pipelines.md">Pipelines spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/cron-guard">Cron Guard</a> — smoke alarm for your agent fleet</li>
-        <li><a href="https://workswithagents.dev/v1/skills/agent-integration-tracker">Integration Tracker</a> — example daily pipeline</li>
-        <li><a href="https://workswithagents.dev/v1/skills/kanban-orchestrator">Kanban Orchestrator</a> — task decomposition pipeline</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Scheduling agents with cron: time-based execution</li>
-      <li>Build pipelines: from change to deployed</li>
-      <li>Pipeline composition: chaining agents together</li>
-    </ul>
-  </div>
-</div>
-
-<!-- PHASE 4: Harden -->
 <div class="phase-header">
   <h2><span class="phase-dot harden"></span> Phase 4 — Harden <span class="range">Modules 8–10</span></h2>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 8</div>
-    <div>
-      <h3>Resilience</h3>
-      <p class="oneliner">Failure recovery that doesn't require human intervention. The agent finds another way.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Exponential backoff</dt><dd>Retrying with increasing delays (1s, 2s, 4s, 8s…) — prevents hammering a failing service.</dd>
-        <dt>Circuit breaker</dt><dd>Stops retrying after N consecutive failures — prevents cascading failures in pipelines.</dd>
-        <dt>Transient error</dt><dd>A temporary failure that resolves on retry (network timeout, rate limit).</dd>
-        <dt>Permanent error</dt><dd>An error that won't resolve on retry (invalid API key, missing file) — should be escalated, not retried.</dd>
-        <dt>Self-healing</dt><dd>The agent detects its own failure, diagnoses the cause, and applies a fix without human input.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/resilience.md">Resilience spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/model-fallback">Model Fallback</a> — automatic provider failover</li>
-        <li><a href="https://workswithagents.dev/v1/skills/cron-guard">Cron Guard</a> — detects stuck pipelines</li>
-        <li><a href="https://workswithagents.dev/v1/pitfalls">Pitfall Registry</a> — failures other agents have hit and how they recovered</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Error categorisation: transient vs. permanent</li>
-      <li>Retry strategies with backoff and circuit breakers</li>
-      <li>Self-healing: when the agent fixes its own mistakes</li>
-    </ul>
-  </div>
+<div class="modules">
+  <a href="/learn/resilience.html" class="module">
+    <div class="num">Module 8 · 14 min read</div>
+    <h4>Resilience</h4>
+    <p>Failure recovery without humans. Backoff, circuit breakers, self-healing agents that find another way.</p>
+    <ul><li>Error categorisation</li><li>Retry strategies</li><li>Self-healing patterns</li></ul>
+  </a>
+  <a href="/learn/verify.html" class="module">
+    <div class="num">Module 9 · 13 min read</div>
+    <h4>Verify</h4>
+    <p>Trust but verify. Quality gate stack — syntax, lint, type, test, visual QA. Human review cadence.</p>
+    <ul><li>Quality gate stack</li><li>Human review cadence</li><li>When to intervene</li></ul>
+  </a>
+  <a href="/learn/compounding.html" class="module">
+    <div class="num">Module 10 · 12 min read</div>
+    <h4>Compounding</h4>
+    <p>The feedback loop. Discoveries → skills → faster sessions → harder problems. The compounding maths.</p>
+    <ul><li>The compounding loop</li><li>What to capture</li><li>The compounding maths</li></ul>
+  </a>
 </div>
 
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 9</div>
-    <div>
-      <h3>Verify</h3>
-      <p class="oneliner">Trust but verify. Automated gates catch problems — and there's a process for when they don't.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Quality gate</dt><dd>An automated check that runs after every agent action — syntax check, lint, type check, test suite.</dd>
-        <dt>Syntax gate</dt><dd>AST parsing that catches broken code before it's committed — blocks the agent from saving invalid files.</dd>
-        <dt>Visual QA</dt><dd>Automated screenshot capture for UI changes — the agent compares before/after and flags differences.</dd>
-        <dt>Review cadence</dt><dd>The rhythm of human review: what to check daily, weekly, monthly — and when to intervene.</dd>
-        <dt>False positive</dt><dd>A gate that blocks valid work — the most common cause of humans disabling quality gates.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/verify.md">Verify spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/screenshot-after-changes">Screenshot After Changes</a> — visual QA automation</li>
-        <li><a href="https://workswithagents.dev/v1/skills/requesting-code-review">Pre-Commit Review</a> — quality gate checklist</li>
-        <li><a href="https://workswithagents.dev/v1/skills/project-audit">Project Audit</a> — comprehensive gap analysis</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Automated testing that runs after every agent action</li>
-      <li>Syntax, linting, type checking — the safety net</li>
-      <li>Human review cadence: what to look for, when to intervene</li>
-    </ul>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-top">
-    <div class="module-num">Module 10</div>
-    <div>
-      <h3>Compounding</h3>
-      <p class="oneliner">The feedback loop. Discoveries become skills. Skills compound. Agents that get better every session.</p>
-    </div>
-  </div>
-  <div class="module-grid">
-    <div class="vocab">
-      <div class="module-label">Vocabulary</div>
-      <dl>
-        <dt>Compounding loop</dt><dd>The cycle: agent solves a problem → captures the solution as a skill → future sessions are faster → agent tackles harder problems.</dd>
-        <dt>Discovery</dt><dd>A new technique, pitfall, or workflow uncovered during a session — captured before it's forgotten.</dd>
-        <dt>Skill library growth</dt><dd>The compounding metric — skills written this month, total skills available, skills loaded per session.</dd>
-        <dt>Compounding maths</dt><dd>1% better each session over 100 sessions = 2.7× improvement. The compounding curve is exponential, not linear.</dd>
-      </dl>
-    </div>
-    <div class="resources">
-      <div class="module-label">Resources</div>
-      <ul>
-        <li><a href="https://workswithagents.dev/specs/compounding.md">Compounding spec</a></li>
-        <li><a href="https://workswithagents.dev/v1/skills/agent-self-improver">Agent Self-Improver</a> — auto-captures learnings</li>
-        <li><a href="https://workswithagents.dev/v1/skills/post-task-capture">Post-Task Capture</a> — save discoveries as skills</li>
-        <li><a href="https://workswithagents.dev/v1/facts">FactBase</a> — cumulative knowledge store</li>
-      </ul>
-    </div>
-  </div>
-  <div class="learn" style="margin-top:16px">
-    <div class="module-label">What You'll Learn</div>
-    <ul>
-      <li>Saving successful approaches as reusable skills</li>
-      <li>Pattern recognition across sessions and projects</li>
-      <li>The compounding maths: 1% better each session, forever</li>
-    </ul>
-  </div>
-</div>
-
-<!-- BONUS -->
 <div class="bonus-section">
   <h2>Bonus Modules</h2>
   <div class="bonus-grid">
     <div class="bonus">
       <h4>B1: Compliance &amp; Security</h4>
       <p>Enterprise-grade agent infrastructure. Credential handling, audit trails, regulated workflows (GDPR, NHS DSP, FCA). Air-gapped deployments.</p>
-      <p style="margin-top:8px;font-size:12px">
-        <span style="color:var(--muted)">Vocab:</span> audit trail, credential proxy, air-gapped deployment, regulated workflow, RBAC<br>
-        <span style="color:var(--muted)">Resources:</span> <a href="https://workswithagents.dev/specs/compliance.md">Compliance spec</a>, <a href="https://workswithagents.dev/v1/skills/credential-proxy">Credential Proxy</a>
-      </p>
     </div>
     <div class="bonus">
       <h4>B2: Local-First Agents</h4>
       <p>On-prem LLMs. Zero cloud dependency. Hardware matching, local inference setup (oMLX, llama.cpp), context window trade-offs.</p>
-      <p style="margin-top:8px;font-size:12px">
-        <span style="color:var(--muted)">Vocab:</span> quantization, GGUF, context window, tokens-per-second, MLX, hardware matching<br>
-        <span style="color:var(--muted)">Resources:</span> <a href="https://workswithagents.io">Blueprint Registry</a>, <a href="https://workswithagents.dev/v1/skills/bonsai-local-agent">Bonsai Local Agent</a>
-      </p>
     </div>
   </div>
 </div>
@@ -565,7 +255,7 @@
 <div class="cta-section">
   <h3>Ready to Start?</h3>
   <p>All modules are free and open. No login, no paywall — just the patterns that make agents work.</p>
-  <a href="/#methodology" class="cta-link">Start with the Methodology →</a>
+  <a href="/learn/boot.html" class="cta-link">Start with Boot →</a>
   <p style="margin-top:16px;font-size:13px">
     Questions? <a href="mailto:hello@workswithagents.com">hello@workswithagents.com</a> · 
     <a href="/newsletter.html">Newsletter</a> for updates · 

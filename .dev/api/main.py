@@ -215,6 +215,15 @@ def home():
   .endpoint{font-family:'SF Mono',SFMono-Regular,Consolas,monospace;background:var(--code-bg);padding:6px 10px;border-radius:6px;margin:5px 0;font-size:12px;border-left:3px solid var(--accent)}
   .method{font-weight:700;color:var(--cta)}.path{color:var(--text)}
   a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}
+  .learn-dropdown{position:relative;display:inline-block}
+  .learn-btn{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
+  .learn-btn:hover{color:var(--text)}
+  .learn-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:200px;z-index:50;padding:8px 0}
+  .learn-dropdown:hover .learn-menu{display:block}
+  .learn-menu a{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}
+  .learn-menu a:hover{background:var(--code-bg,var(--card));color:var(--text)}
+  .learn-menu .phase-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);padding:8px 16px 4px;opacity:0.7}
+  .learn-menu .phase-label:first-child{padding-top:4px}
   .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-left:8px}.tag-knowledge{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}.tag-ops{background:color-mix(in srgb,var(--cta) 15%,transparent);color:var(--cta)}
   footer{text-align:center;padding:24px 0 0;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:13px}footer a{color:var(--accent)}
 </style>
@@ -222,7 +231,25 @@ def home():
 <nav>
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
-    <a href="https://workswithagents.com">Education</a>
+    <div class="learn-dropdown">
+      <a href="https://workswithagents.com/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="https://workswithagents.com/learn/boot.html">1. Boot</a>
+        <a href="https://workswithagents.com/learn/skills.html">2. Skills</a>
+        <a href="https://workswithagents.com/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="https://workswithagents.com/learn/decision-protocols.html">4. Decision Protocols</a>
+        <a href="https://workswithagents.com/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="https://workswithagents.com/learn/orchestration.html">6. Orchestration</a>
+        <a href="https://workswithagents.com/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="https://workswithagents.com/learn/resilience.html">8. Resilience</a>
+        <a href="https://workswithagents.com/learn/verify.html">9. Verify</a>
+        <a href="https://workswithagents.com/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
     <a href="https://workswithagents.com/standards.html">Standards</a>
     <a href="https://workswithagents.io">Blueprints</a>
     <a href="https://workswithagents.com/about.html">About</a>

@@ -355,6 +355,15 @@ def landing():
   nav{{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:36px}}
   .logo{{font-size:16px;font-weight:700;color:var(--text);text-decoration:none}}.logo span{{color:var(--accent)}}
   .nav-links{{display:flex;gap:20px}}.nav-links a{{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500}}.nav-links a:hover{{color:var(--text)}}
+  .learn-dropdown{{position:relative;display:inline-block}}
+  .learn-btn{{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}}
+  .learn-btn:hover{{color:var(--text)}}
+  .learn-menu{{display:none;position:absolute;top:100%;left:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:200px;z-index:50;padding:8px 0}}
+  .learn-dropdown:hover .learn-menu{{display:block}}
+  .learn-menu a{{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}}
+  .learn-menu a:hover{{background:var(--code-bg,var(--card));color:var(--text)}}
+  .learn-menu .phase-label{{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);padding:8px 16px 4px;opacity:0.7}}
+  .learn-menu .phase-label:first-child{{padding-top:4px}}
   h1{{font-size:32px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px}}h1 span{{color:var(--accent)}}
   .subtitle{{font-size:15px;color:var(--muted);margin-bottom:28px}}
   .version-bar{{font-size:11px;color:var(--muted);margin-bottom:20px;padding:6px 12px;background:var(--code-bg);border-radius:6px;display:inline-block}}
@@ -391,7 +400,25 @@ def landing():
 <nav>
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
-    <a href="https://workswithagents.com">Education</a>
+    <div class="learn-dropdown">
+      <a href="https://workswithagents.com/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="https://workswithagents.com/learn/boot.html">1. Boot</a>
+        <a href="https://workswithagents.com/learn/skills.html">2. Skills</a>
+        <a href="https://workswithagents.com/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="https://workswithagents.com/learn/decision-protocols.html">4. Decision Protocols</a>
+        <a href="https://workswithagents.com/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="https://workswithagents.com/learn/orchestration.html">6. Orchestration</a>
+        <a href="https://workswithagents.com/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="https://workswithagents.com/learn/resilience.html">8. Resilience</a>
+        <a href="https://workswithagents.com/learn/verify.html">9. Verify</a>
+        <a href="https://workswithagents.com/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
     <a href="https://workswithagents.com/standards.html">Standards</a>
     <a href="https://workswithagents.com/about.html">About</a>
     <a href="https://workswithagents.dev">Knowledge API</a>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Protocols — Works With Agents</title>
+<meta name="description" content="Pattern 4: Decision Protocols. Autonomy without chaos. Rules your agent follows. When to ask, when to decide.">
+<meta property="og:title" content="Decision Protocols — Works With Agents">
+<meta property="og:description" content="Autonomy without chaos. Rules your agent follows. When to ask, when to decide.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://workswithagents.com/learn/decision-protocols.html">
+<meta property="og:site_name" content="Works With Agents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Decision Protocols — Works With Agents">
+<meta name="twitter:description" content="Autonomy without chaos. Rules your agent follows. When to ask, when to decide.">
+<link rel="canonical" href="https://workswithagents.com/learn/decision-protocols.html">
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --cta: #D97706; --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06); --code-bg: #f1f5f9;
+    --phase-foundation: #059669; --phase-autonomy: #D97706; --phase-scale: #7c3aed; --phase-harden: #dc2626;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --cta: #F59E0B; --border: #334155; --code-bg: #0f172a;
+      --phase-foundation: #10B981; --phase-autonomy: #F59E0B; --phase-scale: #a78bfa; --phase-harden: #f87171;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased }
+  .container { max-width:780px; margin:0 auto; padding:0 24px }
+
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; margin-bottom:32px; flex-wrap:wrap; gap:10px }
+  .logo { font-size:16px; font-weight:700; color:var(--text); text-decoration:none }
+  .logo span { color:var(--accent) }
+  .nav-links { display:flex; gap:18px; align-items:center; flex-wrap:wrap }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:13px; font-weight:500 }
+  .nav-links a:hover { color:var(--text) }
+  .learn-dropdown { position:relative; display:inline-block }
+  .learn-btn { color:var(--accent); text-decoration:none; font-size:13px; font-weight:600; cursor:pointer; background:none; border:none; font-family:inherit }
+  .learn-btn:hover { color:var(--text) }
+  .learn-menu { display:none; position:absolute; top:100%; left:0; background:var(--card); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:200px; z-index:10; padding:8px 0 }
+  .learn-dropdown:hover .learn-menu { display:block }
+  .learn-menu a { display:block; padding:6px 16px; color:var(--muted); font-size:12px; text-decoration:none; white-space:nowrap }
+  .learn-menu a:hover { background:var(--code-bg); color:var(--text) }
+  .learn-menu .phase-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent); padding:8px 16px 4px; opacity:0.7 }
+  .learn-menu .phase-label:first-child { padding-top:4px }
+
+  .breadcrumb { font-size:12px; color:var(--muted); margin-bottom:20px }
+  .breadcrumb a { color:var(--accent); text-decoration:none }
+  .phase-tag { display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; margin-bottom:8px }
+  .phase-tag.foundation { background:color-mix(in srgb, var(--phase-foundation) 12%, transparent); color:var(--phase-foundation) }
+  .phase-tag.autonomy { background:color-mix(in srgb, var(--phase-autonomy) 12%, transparent); color:var(--phase-autonomy) }
+  .phase-tag.scale { background:color-mix(in srgb, var(--phase-scale) 12%, transparent); color:var(--phase-scale) }
+  .phase-tag.harden { background:color-mix(in srgb, var(--phase-harden) 12%, transparent); color:var(--phase-harden) }
+
+  h1 { font-size:32px; font-weight:800; letter-spacing:-0.4px; margin-bottom:6px }
+  .subtitle { color:var(--muted); font-size:15px; margin-bottom:8px }
+  .meta { font-size:12px; color:var(--muted); margin-bottom:28px }
+  .meta span { margin-right:16px }
+
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:20px; box-shadow:var(--shadow) }
+  .card h2 { font-size:18px; margin-bottom:14px }
+  .card h3 { font-size:16px; margin:18px 0 8px }
+
+  .wrong { border-left:3px solid var(--cta) }
+  .wrong p { font-size:14px; color:var(--muted); font-style:italic }
+
+  .vocab dt { font-weight:600; color:var(--text); margin-top:12px; font-size:14px }
+  .vocab dt:first-child { margin-top:0 }
+  .vocab dd { color:var(--muted); font-size:13px; margin-left:0; margin-bottom:6px; line-height:1.6 }
+
+  .resources li { font-size:13px; line-height:2 }
+  .resources a { color:var(--accent); text-decoration:none; font-weight:500 }
+  .resources a:hover { text-decoration:underline }
+
+  .code-block { background:var(--code-bg); border:1px solid var(--border); border-radius:8px; padding:16px; margin:12px 0; overflow-x:auto }
+  .code-block pre { font-family:'SF Mono',SFMono-Regular,Consolas,monospace; font-size:12px; line-height:1.6; color:var(--text) }
+
+  .lesson p, .lesson li { font-size:14px; color:var(--text); line-height:1.8 }
+  .lesson ul, .lesson ol { padding-left:20px; margin:8px 0 }
+  .lesson li { margin-bottom:4px }
+  .highlight { background:color-mix(in srgb, var(--cta) 8%, transparent); border-left:3px solid var(--cta); padding:12px 16px; border-radius:0 8px 8px 0; margin:16px 0; font-weight:600 }
+
+  .prev-next-row { display:flex; justify-content:space-between; margin:32px 0; padding:16px 0; border-top:1px solid var(--border) }
+  .prev-next { color:var(--accent); text-decoration:none; font-weight:600; font-size:14px }
+  .prev-next:hover { text-decoration:underline }
+
+  footer { text-align:center; padding:40px 0; border-top:1px solid var(--border); margin-top:20px; color:var(--muted); font-size:13px }
+  footer a { color:var(--accent); text-decoration:none }
+
+  @media (max-width:640px) { h1 { font-size:26px } nav { flex-direction:column } .prev-next-row { flex-direction:column; gap:8px } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <div class="learn-dropdown">
+      <a href="/learn.html" class="learn-btn">Learn ▾</a>
+      <div class="learn-menu">
+        <span class="phase-label">Foundation</span>
+        <a href="/learn/boot.html">1. Boot</a>
+        <a href="/learn/skills.html">2. Skills</a>
+        <a href="/learn/memory.html">3. Memory</a>
+        <span class="phase-label">Autonomy</span>
+        <a href="/learn/decision-protocols.html">4. Decision Protocols</a>
+        <a href="/learn/tool-composition.html">5. Tool Composition</a>
+        <span class="phase-label">Scale</span>
+        <a href="/learn/orchestration.html">6. Orchestration</a>
+        <a href="/learn/pipelines.html">7. Pipelines</a>
+        <span class="phase-label">Harden</span>
+        <a href="/learn/resilience.html">8. Resilience</a>
+        <a href="/learn/verify.html">9. Verify</a>
+        <a href="/learn/compounding.html">10. Compounding</a>
+      </div>
+    </div>
+    <a href="/standards.html">Standards</a>
+    <a href="https://workswithagents.io">Blueprints</a>
+    <a href="/about.html">About</a>
+    <a href="https://workswithagents.dev">API</a>
+    <a href="https://workswithagents.co.uk">UK</a>
+    <a href="https://bastiongateway.com">Bastion</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="/learn.html">Learn</a> / <strong>Decision Protocols</strong>
+</div>
+
+<span class="phase-tag autonomy">Autonomy</span>
+<h1>Pattern 4: Decision Protocols</h1>
+<p class="subtitle">Autonomy without chaos. Rules your agent follows. When to ask, when to decide.</p>
+<p class="meta">
+  <span>⏱ 12 min read</span>
+  <span>🛠 15 min to write protocols</span>
+  <span>📋 Prerequisites: Patterns 1-3 (Foundation complete)</span>
+</p>
+
+<div class="card wrong">
+  <h2>What Most People Do Wrong</h2>
+  <p>The agent asks permission for everything. 'Can I create a file?' 'Can I run this test?' 'Can I search for that pattern?' You become the bottleneck — spending more time approving than the agent saves. Or the opposite: you give it full autonomy and it deploys untested code to production.</p>
+</div>
+
+<div class="card lesson">
+  <h2>The Lesson</h2>
+  <h3>The Autonomy Spectrum</h3>
+<p>Not all actions are equal. Some should always require approval. Some should never. Most fall in between:</p>
+<ul>
+<li><strong>Always auto:</strong> Read files, search code, run non-destructive commands, check git status, lint</li>
+<li><strong>Auto if tested:</strong> Write files (post-syntax-check), run tests, commit (post-lint+test), create branches</li>
+<li><strong>Ask first:</strong> Deploy to production, delete branches, modify CI config, send external messages, modify credentials</li>
+<li><strong>Never auto:</strong> Delete data, drop databases, revoke access, change billing, modify production config</li>
+</ul>
+
+<h3>The Protocol Template</h3>
+<div class="code-block"><pre># Decision Protocols
+
+## Auto-proceed (no approval needed)
+- Read files, search code, run non-destructive commands
+- Create new files (syntax check runs automatically)
+- Targeted edits with patch tool
+- Run tests, lint, type-check
+
+## Ask before
+- Deploy to production
+- Modify CI/CD configuration
+- Delete branches or files
+- Send external communications
+
+## Never auto (always require explicit confirmation)
+- Delete data or databases
+- Modify production credentials
+- Change billing or access controls</pre></div>
+
+<h3>Trust Calibration</h3>
+<p>Start at Level 1 (non-destructive auto only). After 10 sessions with no incidents, graduate to Level 2 (auto with post-hoc review). After 50 sessions and zero rollbacks, consider Level 3. Trust is earned per category — an agent might be trusted on code changes but not on deployment. Calibrate separately.</p>
+</div>
+
+<div class="card vocab">
+  <h2>Vocabulary</h2>
+  <dl><dt>Decision protocol</dt><dd>A rule that tells the agent when to proceed autonomously and when to pause for human approval.</dd><dt>Micromanagement trap</dt><dd>The pattern of over-approving — the human becomes a bottleneck because the agent asks permission for every file write, every command, every decision.</dd><dt>Trust calibration</dt><dd>The process of starting with tight constraints (always ask) and loosening over time as the agent proves reliable on specific categories of action.</dd><dt>Destructive guard</dt><dd>A protocol that requires explicit approval for irreversible actions: deploy to production, delete data, send external email, publish to social media.</dd><dt>Autonomy level</dt><dd>The tiered permission system: Level 0 (ask everything) → Level 1 (non-destructive auto) → Level 2 (auto with post-hoc review) → Level 3 (full auto, monitor-only).</dd></dl>
+</div>
+
+<div class="card resources">
+  <h2>Resources</h2>
+  <ul><li><a href="https://workswithagents.dev/specs/decision-protocols.md">Decision Protocols spec</a></li><li><a href="https://workswithagents.dev/v1/pitfalls?tool=decision">Decision protocol pitfalls</a></li><li><a href="https://workswithagents.io">Blueprint Registry</a></li><li><a href="https://workswithagents.dev/v1/skills/agent-orchestrator">Agent orchestrator skill</a></li></ul>
+</div>
+
+<div class="prev-next-row">
+  <a href="memory.html" class="prev-next">← Memory</a>
+  <a href="tool-composition.html" class="prev-next">Tool Composition →</a>
+</div>
+
+<footer>
+  <p>Works With Agents · <a href="https://workswithagents.io">Blueprints</a> · <a href="https://workswithagents.dev">API</a> · <a href="https://workswithagents.co.uk">UK</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+</body>
+</html>
