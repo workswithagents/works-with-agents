@@ -1,4 +1,4 @@
-<!-- lastmod: 2026-05-05 -->
+<!-- lastmod: 2026-05-06 -->
 <!-- LANGUAGE: en (primary). Canonical: https://workswithagents.com/llms.txt -->
 
 # Works With Agents — Education
@@ -13,8 +13,8 @@
 
 Works With Agents teaches a 10-pattern methodology for working with AI agents as
 collaborators with memory, skills, and autonomous decision-making. Developed through
-hands-on experimentation — 3 days, 111 SPFx web parts, 5 backend services scaffolded
-autonomously. The patterns that emerged are now a structured methodology.
+hands-on experimentation — 3 days, patterns that emerged from autonomous
+agent-assisted development. The patterns that surfaced are now a structured methodology.
 
 **Founders:** Vilius Vystartas (technical, M365 developer) & Pelin Kayhan (business/compliance).
 Cardiff, UK.
