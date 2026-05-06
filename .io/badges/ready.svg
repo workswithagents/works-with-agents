@@ -7,7 +7,5 @@
   </defs>
   <rect width="240" height="40" rx="6" fill="#0a0a14"/>
   <rect x="1" y="1" width="238" height="38" rx="5" fill="none" stroke="url(#g)" stroke-opacity="0.4" stroke-width="1"/>
-  <text x="12" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="url(#g)">◆ Works With Agents</text>
-  <text x="132" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="400" fill="#555570">—</text>
-  <text x="146" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#e8e8f0">Ready</text>
+  <text x="12" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="url(#g)">◆ Works With Agents <tspan font-weight="600" fill="#e8e8f0" font-size="12">Ready</tspan></text>
 </svg>
