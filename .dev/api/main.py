@@ -229,7 +229,7 @@ def home():
   </div>
 </nav>
 
-  <div class="badge">Knowledge platform — code written, not yet deployed</div>
+  <div class="badge">Knowledge platform — live on HTTPS</div>
   <h1>Knowledge <span class="t">Platform</span></h1>
   <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Source of truth for AI agent facts, skills, and shared knowledge.</p>
 

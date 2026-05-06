@@ -1,41 +1,71 @@
 #!/bin/bash
-# Deploy all Works With Agents + Bastion Gateway sites to Cloudflare
-# Prerequisites: npx wrangler login, Cloudflare account with DNS zones configured
+# Deploy Works With Agents + Bastion Gateway
+# Hybrid: static sites → Cloudflare Pages, APIs → Hetzner VPS (via rsync+ssh)
+# Prerequisites: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, VPS_HOST
 
 set -e
 
-echo "=== Deploying Works With Agents ==="
+echo "=== Deploying Works With Agents + Bastion Gateway ==="
 
-# .dev — API Worker
+# ── Static Sites (Cloudflare Pages) ──────────────────────────────────
 echo ""
-echo "--- workswithagents.dev (API Worker) ---"
-cd "$HOME/Agent-Projects/works-with-agents/.dev"
-npx wrangler deploy --env production
+echo "--- Static Sites: Cloudflare Pages ---"
 
-# .com — Pages
-echo ""
-echo "--- workswithagents.com (Pages) ---"
-cd "$HOME/Agent-Projects/works-with-agents/.com"
-npx wrangler pages deploy . --project-name workswithagents-com --branch main
+for site in workswithagents-com workswithagents-couk; do
+  dir=$(echo "$site" | sed 's/workswithagents-//')
+  echo "  Deploying $dir..."
+  cd "$HOME/Agent-Projects/works-with-agents/.$dir"
+  npx wrangler pages deploy . --project-name "$site" --branch main
+done
 
-# .co.uk — Pages
-echo ""
-echo "--- workswithagents.co.uk (Pages) ---"
-cd "$HOME/Agent-Projects/works-with-agents/.co.uk"
-npx wrangler pages deploy . --project-name workswithagents-couk --branch main
+# ── APIs (Hetzner VPS) ──────────────────────────────────────────────
+if [ -z "$VPS_HOST" ]; then
+  echo ""
+  echo "⚠️  VPS_HOST not set — skipping API deployments."
+  echo "   To deploy .dev, .io, Bastion: set VPS_HOST and run again."
+  echo "   Static sites (.com, .co.uk) deployed successfully."
+  exit 0
+fi
 
-# Bastion Gateway — API Worker
 echo ""
-echo "--- bastiongateway.com (API Worker) ---"
-cd "$HOME/Agent-Projects/bastion-gateway"
-npx wrangler deploy --env production
+echo "--- APIs: rsync → $VPS_HOST ---"
+
+APIS=(
+  "workswithagents.dev:.dev/api"
+  "workswithagents.io:.io/api"
+  "bastiongateway.com:../bastion-gateway/api"
+)
+
+for api in "${APIS[@]}"; do
+  domain="${api%%:*}"
+  src="${api##*:}"
+  echo "  Deploying $domain..."
+
+  # Resolve relative path
+  if [[ "$src" == ../* ]]; then
+    cd "$HOME/Agent-Projects"
+    src_path="${src#../}"
+  else
+    cd "$HOME/Agent-Projects/works-with-agents"
+    src_path="$src"
+  fi
+
+  rsync -avz --exclude '__pycache__' --exclude '*.pyc' --exclude 'data/' \
+    "$src_path/" "$VPS_HOST:/opt/$domain/"
+
+  # Restart service
+  ssh "$VPS_HOST" "sudo systemctl restart $domain"
+done
 
 echo ""
 echo "=== All deployed ==="
-echo "Check: https://workswithagents.dev/v1/health"
 echo "Check: https://workswithagents.com"
 echo "Check: https://workswithagents.co.uk"
+echo "Check: https://workswithagents.dev/v1/health"
+echo "Check: https://workswithagents.io/v1/health"
 echo "Check: https://bastiongateway.com/v1/health"
 
-# Note: DNS must already be configured in Cloudflare for these zones.
-# Workers/Functions routes assume the domains are in your Cloudflare account.
+echo ""
+echo "DNS must be configured: all domains → VPS IP (orange-cloud ON)."
+echo "Static sites (.com, .co.uk) served via Cloudflare Pages CNAME."
+echo "APIs (.dev, .io, bastiongateway) served via Cloudflare → VPS proxy."
