@@ -78,18 +78,18 @@ Cross-framework:
 - [ASFS — Agent Skill Format Standard](https://workswithagents.dev/specs/asfs.md) — Universal skill interchange
 
 Layer 1 (Hardware):
-- [Onboarding Protocol](https://workswithagents.dev/specs/onboarding-protocol.md)
+- [Onboarding Protocol](https://workswithagents.dev/specs/onboarding.md)
 
 Layer 2-3 (Identity + Discovery):
-- [Identity Protocol](https://workswithagents.dev/specs/identity-protocol.md)
+- [Identity Protocol](https://workswithagents.dev/specs/identity.md)
 - [Agent Capability Manifest](https://workswithagents.dev/specs/capability-manifest.md)
 - [Trust Score](https://workswithagents.dev/specs/trust-score.md)
 
 Layer 4 (Session):
-- [Handoff Protocol](https://workswithagents.dev/specs/handoff-protocol.md) — MCP SEP #2683, A2A #1817
+- [Handoff Protocol](https://workswithagents.dev/specs/handoff.md) — MCP SEP #2683, A2A #1817
 
 Layer 5 (Coordination):
-- [Coordination Protocol](https://workswithagents.dev/specs/coordination-protocol.md)
+- [Coordination Protocol](https://workswithagents.dev/specs/coordination.md)
 - [IACP — Inter-Agent Communication](https://workswithagents.dev/specs/iacp.md)
 
 Cross-layer:
@@ -97,7 +97,7 @@ Cross-layer:
 - [Reputation Ledger](https://workswithagents.dev/specs/reputation-ledger.md)
 
 Layer 7 (Governance):
-- [Transaction Protocol](https://workswithagents.dev/specs/transaction-protocol.md)
+- [Transaction Protocol](https://workswithagents.dev/specs/transaction.md)
 - [SLA Framework](https://workswithagents.dev/specs/sla-framework.md)
 - [Compliance-as-Code](https://workswithagents.dev/specs/compliance-as-code.md)
 - [Agent Economics Protocol](https://workswithagents.dev/specs/agent-economics.md)

@@ -89,6 +89,6 @@ Nobody is asking: "How do agents talk to each other? How does agent A verify age
 - `iacp.md` — IACP specification (ready for IETF submission)
 - `asfs.md` — ASFS specification (ready for IEEE submission)
 - `compliance-as-code.md` — Compliance-as-Code spec (ready for CWA)
-- `identity-protocol.md` — Identity Protocol (ready for BSI PAS)
-- `handoff-protocol.md` — Handoff Protocol (already submitted to MCP SEP #2683, A2A #1817)
+- `identity.md` — Identity Protocol (ready for BSI PAS)
+- `handoff.md` — Handoff Protocol (already submitted to MCP SEP #2683, A2A #1817)
 - `agent-osi-model.md` — Framework document (supporting material for all submissions)

@@ -1,6 +1,6 @@
 {
   "name": "@workswithagents/agent-foundry",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Works With Agents — TypeScript SDK for agent identity, trust, compliance, and fleet management",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -17,9 +17,13 @@
     "agent-foundry"
   ],
   "license": "CC-BY-4.0",
+  "homepage": "https://workswithagents.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vystartasv/works-with-agents.git"
+    "url": "git+https://github.com/workswithagents/works-with-agents.git"
+  },
+  "bugs": {
+    "url": "https://github.com/workswithagents/works-with-agents/issues"
   },
   "author": "Works With Agents <hello@workswithagents.com>",
   "publishConfig": {
