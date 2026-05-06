@@ -393,7 +393,7 @@ def landing():
   .docker-section{{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-top:40px;box-shadow:var(--shadow)}}
   .docker-section h2{{font-size:18px;margin-bottom:6px}}.docker-section p{{font-size:13px;color:var(--muted);margin-bottom:12px}}
   app-footer{{text-align:center;padding:40px 0;border-top:1px solid var(--border);margin-top:40px;color:var(--muted);font-size:13px}}app-footer a{{color:var(--accent);text-decoration:none}}
-  @media(max-width:640px){{.filters{{flex-direction:column}}nav{{flex-direction:column;gap:10px;margin-bottom:24px}}.nav-links{{flex-wrap:wrap;gap:12px;justify-content:center}}h1{{font-size:22px}}.container{{padding:0 12px}}}}
+  .sites-dropdown{{position:relative;display:inline-block}}.sites-btn{{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer}}.sites-btn:hover{{color:var(--text)}}.sites-menu{{display:none;position:absolute;top:100%;right:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:180px;z-index:50;padding:8px 0}}.sites-dropdown:hover .sites-menu{{display:block}}.sites-menu a{{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}}.sites-menu a:hover{{background:var(--code-bg,var(--card));color:var(--text)}}@media(max-width:640px){{.filters{{flex-direction:column}}nav{{flex-direction:column;gap:10px;margin-bottom:24px}}.nav-links{{flex-wrap:wrap;gap:12px;justify-content:center}}h1{{font-size:22px}}.container{{padding:0 12px}}}}
 </style>
 </head>
 <body><div class="container">
@@ -419,11 +419,21 @@ def landing():
         <a href="https://workswithagents.com/learn/compounding.html">10. Compounding</a>
       </div>
     </div>
-    <a href="https://workswithagents.com/standards.html">Standards</a>
+    <a href="https://workswithagents.com/standards.html">Standards</a>\n    <a href="https://workswithagents.com/blog.html">Blog</a>
     <a href="https://workswithagents.com/about.html">About</a>
+    <a href="https://workswithagents.com/contact.html">Contact</a>
     <a href="https://workswithagents.dev">Knowledge API</a>
     <a href="https://workswithagents.co.uk">UK</a>
     <a href="https://bastiongateway.com">Bastion</a>
+    <div class="sites-dropdown">
+      <a class="sites-btn">Sites ▾</a>
+      <div class="sites-menu">
+        <a href="https://workswithagents.com">Education</a>
+        <a href="https://workswithagents.dev">Knowledge API</a>
+        <a href="https://workswithagents.co.uk">UK</a>
+        <a href="https://bastiongateway.com">Bastion</a>
+      </div>
+    </div>
   </div>
 </nav>
 

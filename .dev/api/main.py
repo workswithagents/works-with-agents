@@ -226,7 +226,7 @@ def home():
   .learn-menu .phase-label:first-child{padding-top:4px}
   .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-left:8px}.tag-knowledge{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}.tag-ops{background:color-mix(in srgb,var(--cta) 15%,transparent);color:var(--cta)}
   footer{text-align:center;padding:24px 0 0;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:13px}footer a{color:var(--accent)}
-  @media(max-width:640px){nav{flex-direction:column;gap:10px;margin-bottom:24px}.nav-links{flex-wrap:wrap;gap:12px;justify-content:center}h1{font-size:22px}.card{padding:16px}.endpoint{font-size:11px;padding:4px 8px}.container{padding:0 12px}}
+  .sites-dropdown{position:relative;display:inline-block}.sites-btn{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer}.sites-btn:hover{color:var(--text)}.sites-menu{display:none;position:absolute;top:100%;right:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:180px;z-index:50;padding:8px 0}.sites-dropdown:hover .sites-menu{display:block}.sites-menu a{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}.sites-menu a:hover{background:var(--code-bg,var(--card));color:var(--text)}@media(max-width:640px){nav{flex-direction:column;gap:10px;margin-bottom:24px}.nav-links{flex-wrap:wrap;gap:12px;justify-content:center}h1{font-size:22px}.card{padding:16px}.endpoint{font-size:11px;padding:4px 8px}.container{padding:0 12px}}
 </style>
 <body><div class="container">
 <nav>
@@ -251,11 +251,20 @@ def home():
         <a href="https://workswithagents.com/learn/compounding.html">10. Compounding</a>
       </div>
     </div>
-    <a href="https://workswithagents.com/standards.html">Standards</a>
+    <a href="https://workswithagents.com/standards.html">Standards</a>\n    <a href="https://workswithagents.com/blog.html">Blog</a>
     <a href="https://workswithagents.io">Blueprints</a>
     <a href="https://workswithagents.com/about.html">About</a>
     <a href="https://workswithagents.co.uk">UK</a>
     <a href="https://bastiongateway.com">Bastion</a>
+    <div class="sites-dropdown">
+      <a class="sites-btn">Sites ▾</a>
+      <div class="sites-menu">
+        <a href="https://workswithagents.com">Education</a>
+        <a href="https://workswithagents.io">Blueprints</a>
+        <a href="https://workswithagents.co.uk">UK</a>
+        <a href="https://bastiongateway.com">Bastion</a>
+      </div>
+    </div>
   </div>
 </nav>
 
