@@ -44,7 +44,7 @@ The 10 patterns emerged from hands-on experimentation: agents were given autonom
 
 ## Founders
 
-**Vilius Vystartas** — Technical founder. M365 Developer building the agentic methodology through hands-on experimentation. Cardiff, UK. Built Bastion and Works With Agents solo. Hugging Face: vystartasv.
+**Vilius Vystartas** — Technical founder. M365 Developer building the agentic methodology through hands-on experimentation. Cardiff, UK. Built the Bastion infrastructure independently. Hugging Face: vystartasv.
 
 **Pelin Kayhan** — Co-owner. Business operations and compliance. Non-technical. Manages client relationships, regulatory alignment, and business development. Ensures the methodology works for non-technical stakeholders.
 

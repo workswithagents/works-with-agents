@@ -14,7 +14,7 @@ We teach developers and engineering teams how to work with AI agents effectively
 6. **Orchestration** — Multi-agent workflows. Parallel streams, specialist agents.
 7. **Pipelines** — Agents that run while you sleep. Cron, builds, monitoring.
 8. **Resilience** — Never-stop loops. Retry, backoff, self-healing.
-9. **Verify** — Trust but verify. Automated gates + human review cadence.
+9. **Verify** — Trust but verify. Automated gates + human review.
 10. **Compounding** — Agents that get better. Discoveries → skills → forever.
 
 ## Products
@@ -33,12 +33,18 @@ A weekend experiment with an AI agent produced 111 SPFx web parts. Not a product
 
 | Asset | Path |
 |-------|------|
-| Website | `.com/index.html` |
+| Website (.com) | `.com/index.html` |
+| UK mirror (.co.uk) | `.co.uk/index.html` |
+| Knowledge API (.dev) | `.dev/api/main.py` |
+| Blueprint Registry (.io) | `.io/api/main.py` |
 | Course outline | `docs/COURSE-OUTLINE.md` |
 | Weekend experiment | `docs/bastion-weekend.md` |
 | Launch package | `docs/LAUNCH-PACKAGE.md` |
 | Market validation | `market-validation.md` |
+| Specs (16 published) | `specs/` |
+| Compliance docs | `compliance/` |
 
 ## Contact
 
-Vilius Vystartas — Cardiff, UK
+Vilius Vystartas — Technical, Cardiff
+Pelin Kayhan — Business & Compliance

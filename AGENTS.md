@@ -7,14 +7,15 @@ Co-founded by Vilius Vystartas (technical) & Pelin Kayhan (business/compliance).
 
 | Domain | Purpose | Tech | Deploy |
 |---|---|---|---|
-| workswithagents.dev | Agent API — facts, skills, fleet health | FastAPI (Worker) | `npx wrangler deploy` |
-| workswithagents.com | Global education — courses, newsletter | Static HTML (Pages) | `npx wrangler pages deploy` |
+| workswithagents.com | Global education — courses, blog, newsletter | Static HTML (Pages) | `npx wrangler pages deploy` |
 | workswithagents.co.uk | UK education mirror | Static HTML (Pages) | `npx wrangler pages deploy` |
-| bastiongateway.com | Infrastructure — license, proxy, admin | FastAPI (Worker) | `npx wrangler deploy` |
+| workswithagents.dev | Knowledge Platform — FactBase, skills, pitfalls, API | FastAPI (VPS) | Hetzner + nginx |
+| workswithagents.io | Blueprint Registry — verified LLM configs, hardware-matched | FastAPI (VPS) | Hetzner + nginx |
+| bastiongateway.com | Infrastructure — license, proxy, admin | FastAPI (VPS) | Hetzner + nginx |
 
 ## Key files
 
-- `deploy.sh` — deploy all 4 domains
+- `deploy.sh` — deploy all 5 domains (static sites on Cloudflare Pages, APIs on VPS)
 - `.dev/api/main.py` — Agent Operations API (FastAPI, all endpoints live)
 - `.dev/llms.txt` / `.dev/llms-full.txt` — AI agent documentation index
 - `.dev/openapi.json` — OpenAPI 3.1 spec
@@ -40,6 +41,7 @@ curl https://workswithagents.dev/v1/openapi.json → API contract
 3. ✅ Landing pages (.com, .co.uk)
 4. ✅ Bastion Gateway (license, proxy, admin)
 5. ✅ llms.txt / llms-full.txt / openapi.json on all 3 domains
-6. 🔜 Cloudflare deployment (DNS + D1 databases needed)
-7. 🔜 Newsletter integration (ConvertKit/Buttondown)
-8. 🔜 Course platform integration
+6. ✅ Cloudflare Pages deployment (.com + .co.uk static sites live)
+7. 🔜 VPS deployment (.dev, .io, Bastion FastAPI APIs)
+8. 🔜 Newsletter integration (ConvertKit/Buttondown)
+9. 🔜 Course platform integration
