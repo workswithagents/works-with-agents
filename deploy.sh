@@ -1,11 +1,11 @@
 #!/bin/bash
-# Deploy Works With Agents + Bastion Gateway
-# Hybrid: static sites → Cloudflare Pages, APIs → Hetzner VPS (via rsync+ssh)
+# Deploy Works With Agents
+# Hybrid: static redirects → Cloudflare Pages, API → Hetzner VPS (via rsync+ssh)
 # Prerequisites: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, VPS_HOST
 
 set -e
 
-echo "=== Deploying Works With Agents + Bastion Gateway ==="
+echo "=== Deploying Works With Agents ==="
 
 # ── Pre-Deploy Scrub (BLOCKS if internal content found) ──────────────
 echo ""
@@ -13,9 +13,9 @@ echo "--- Pre-Deploy Scrub ---"
 python3.11 ~/.hermes/scripts/pre-publish-scrub.py --strict
 echo ""
 
-# ── Static Sites (Cloudflare Pages) ──────────────────────────────────
+# ── Static Redirects (Cloudflare Pages) ────────────────────────────
 echo ""
-echo "--- Static Sites: Cloudflare Pages ---"
+echo "--- Static Redirects: Cloudflare Pages ---"
 
 for site in workswithagents-com workswithagents-couk; do
   dir=$(echo "$site" | sed 's/workswithagents-//')
@@ -24,54 +24,27 @@ for site in workswithagents-com workswithagents-couk; do
   npx wrangler pages deploy . --project-name "$site" --branch main
 done
 
-# ── APIs (Hetzner VPS) ──────────────────────────────────────────────
+# ── API (Hetzner VPS) ──────────────────────────────────────────────
 if [ -z "$VPS_HOST" ]; then
   echo ""
-  echo "⚠️  VPS_HOST not set — skipping API deployments."
-  echo "   To deploy .dev, .io, Bastion: set VPS_HOST and run again."
-  echo "   Static sites (.com, .co.uk) deployed successfully."
+  echo "⚠️  VPS_HOST not set — skipping API deployment."
   exit 0
 fi
 
 echo ""
-echo "--- APIs: rsync → $VPS_HOST ---"
+echo "--- API: rsync → $VPS_HOST ---"
 
-APIS=(
-  "workswithagents.dev:.dev/api"
-  "workswithagents.io:.io/api"
-  "bastiongateway.com:../bastion-gateway/api"
-)
+DOMAIN="workswithagents.dev"
+SRC=".dev/api"
+cd "$HOME/Agent-Projects/works-with-agents"
+rsync -avz --exclude '__pycache__' --exclude '*.pyc' --exclude 'data/' \
+  "$SRC/" "$VPS_HOST:/opt/$DOMAIN/"
 
-for api in "${APIS[@]}"; do
-  domain="${api%%:*}"
-  src="${api##*:}"
-  echo "  Deploying $domain..."
+# Also sync specs + llms files
+rsync -avz .dev/specs/ .dev/llms.txt .dev/llms-full.txt "$VPS_HOST:/opt/works-with-agents/.dev/"
 
-  # Resolve relative path
-  if [[ "$src" == ../* ]]; then
-    cd "$HOME/Agent-Projects"
-    src_path="${src#../}"
-  else
-    cd "$HOME/Agent-Projects/works-with-agents"
-    src_path="$src"
-  fi
-
-  rsync -avz --exclude '__pycache__' --exclude '*.pyc' --exclude 'data/' \
-    "$src_path/" "$VPS_HOST:/opt/$domain/"
-
-  # Restart service
-  ssh "$VPS_HOST" "sudo systemctl restart $domain"
-done
+ssh "$VPS_HOST" "sudo systemctl restart wwa-dev"
 
 echo ""
-echo "=== All deployed ==="
-echo "Check: https://workswithagents.com"
-echo "Check: https://workswithagents.co.uk"
-echo "Check: https://workswithagents.dev/v1/health"
-echo "Check: https://workswithagents.io/v1/health"
-echo "Check: https://bastiongateway.com/v1/health"
-
-echo ""
-echo "DNS must be configured: all domains → VPS IP (orange-cloud ON)."
-echo "Static sites (.com, .co.uk) served via Cloudflare Pages CNAME."
-echo "APIs (.dev, .io, bastiongateway) served via Cloudflare → VPS proxy."
+echo "=== Deployed ==="
+echo "https://workswithagents.dev"

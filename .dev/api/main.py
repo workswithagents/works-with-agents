@@ -18,8 +18,7 @@ Endpoints:
 
 On-prem: Docker image available. Set SYNC_FROM=https://workswithagents.dev for periodic sync.
 
-Ops/monitoring (heartbeat, fleet health) → bastiongateway.com.
-Blueprint Registry (verified LLM configs) → workswithagents.io.
+Ops/monitoring (heartbeat, fleet health) → internal infrastructure.
 """
 
 import hashlib, json, os, sqlite3
@@ -199,6 +198,16 @@ def home():
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Works With Agents — Knowledge Platform. Open specifications and SDKs for AI agent interoperability. 15 protocols, CC BY 4.0.">
+<meta property="og:title" content="Works With Agents — Knowledge Platform">
+<meta property="og:description" content="15 open specifications for AI agent interoperability. Knowledge API, FactBase, Skill Registry, SDKs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://workswithagents.dev/">
+<meta property="og:site_name" content="Works With Agents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Works With Agents — Knowledge Platform">
+<meta name="twitter:description" content="15 open specifications for AI agent interoperability. Knowledge API, SDKs, on-prem deployment.">
+<link rel="canonical" href="https://workswithagents.dev/">
 <title>Works With Agents — Knowledge Platform</title>
 <style>
   :root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--muted:#475569;--accent:#059669;--cta:#D97706;--border:#e2e8f0;--code-bg:#f1f5f9;--shadow:0 1px 3px rgba(0,0,0,0.06)}
@@ -215,62 +224,27 @@ def home():
   .endpoint{font-family:'SF Mono',SFMono-Regular,Consolas,monospace;background:var(--code-bg);padding:6px 10px;border-radius:6px;margin:5px 0;font-size:12px;border-left:3px solid var(--accent)}
   .method{font-weight:700;color:var(--cta)}.path{color:var(--text)}
   a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}
-  .learn-dropdown{position:relative;display:inline-block}
-  .learn-btn{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
-  .learn-btn:hover{color:var(--text)}
-  .learn-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);min-width:200px;z-index:50;padding:8px 0}
-  .learn-dropdown:hover .learn-menu{display:block}
-  .learn-menu a{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}
-  .learn-menu a:hover{background:var(--code-bg,var(--card));color:var(--text)}
-  .learn-menu .phase-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);padding:8px 16px 4px;opacity:0.7}
-  .learn-menu .phase-label:first-child{padding-top:4px}
   .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-left:8px}.tag-knowledge{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}.tag-ops{background:color-mix(in srgb,var(--cta) 15%,transparent);color:var(--cta)}
   footer{text-align:center;padding:24px 0 0;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:13px}footer a{color:var(--accent)}
-  .sites-dropdown{position:relative;display:inline-block}.sites-btn{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer}.sites-btn:hover{color:var(--text)}.sites-menu{display:none;position:absolute;top:100%;right:0;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:180px;z-index:50;padding:8px 0}.sites-dropdown:hover .sites-menu{display:block}.sites-menu a{display:block;padding:6px 16px;color:var(--muted);font-size:12px;text-decoration:none;white-space:nowrap}.sites-menu a:hover{background:var(--code-bg,var(--card));color:var(--text)}@media(max-width:640px){nav{flex-direction:column;gap:10px;margin-bottom:24px}.nav-links{flex-wrap:wrap;gap:12px;justify-content:center}h1{font-size:22px}.card{padding:16px}.endpoint{font-size:11px;padding:4px 8px}.container{padding:0 12px}}
+  @media(max-width:640px){nav{flex-direction:column;gap:10px;margin-bottom:24px}.nav-links{flex-wrap:wrap;gap:12px;justify-content:center}h1{font-size:22px}.card{padding:16px}.endpoint{font-size:11px;padding:4px 8px}.container{padding:0 12px}}
 </style>
 <body><div class="container">
 <nav>
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
-    <div class="learn-dropdown">
-      <a href="https://workswithagents.com/learn.html" class="learn-btn">Learn ▾</a>
-      <div class="learn-menu">
-        <span class="phase-label">Foundation</span>
-        <a href="https://workswithagents.com/learn/boot.html">1. Boot</a>
-        <a href="https://workswithagents.com/learn/skills.html">2. Skills</a>
-        <a href="https://workswithagents.com/learn/memory.html">3. Memory</a>
-        <span class="phase-label">Autonomy</span>
-        <a href="https://workswithagents.com/learn/decision-protocols.html">4. Decision Protocols</a>
-        <a href="https://workswithagents.com/learn/tool-composition.html">5. Tool Composition</a>
-        <span class="phase-label">Scale</span>
-        <a href="https://workswithagents.com/learn/orchestration.html">6. Orchestration</a>
-        <a href="https://workswithagents.com/learn/pipelines.html">7. Pipelines</a>
-        <span class="phase-label">Harden</span>
-        <a href="https://workswithagents.com/learn/resilience.html">8. Resilience</a>
-        <a href="https://workswithagents.com/learn/verify.html">9. Verify</a>
-        <a href="https://workswithagents.com/learn/compounding.html">10. Compounding</a>
-      </div>
-    </div>
-    <a href="https://workswithagents.com/standards.html">Standards</a>\n    <a href="https://workswithagents.com/blog.html">Blog</a>
-    <a href="https://workswithagents.io">Blueprints</a>
-    <a href="https://workswithagents.com/about.html">About</a>
-    <a href="https://workswithagents.co.uk">UK</a>
-    <a href="https://bastiongateway.com">Bastion</a>
-    <div class="sites-dropdown">
-      <a class="sites-btn">Sites ▾</a>
-      <div class="sites-menu">
-        <a href="https://workswithagents.com">Education</a>
-        <a href="https://workswithagents.io">Blueprints</a>
-        <a href="https://workswithagents.co.uk">UK</a>
-        <a href="https://bastiongateway.com">Bastion</a>
-      </div>
-    </div>
+    <a href="/specs/">Specs</a>
+    <a href="/docs">API Docs</a>
   </div>
 </nav>
 
   <div class="badge">Knowledge platform — live on HTTPS</div>
   <h1>Knowledge <span class="t">Platform</span></h1>
-  <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Source of truth for AI agent facts, skills, and shared knowledge.</p>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:24px">15 open specifications for AI agent interoperability. Knowledge API, FactBase, Skill Registry, SDKs. CC BY 4.0.</p>
+
+  <div class="card"><h2>Specifications <span class="tag tag-knowledge">15 specs</span></h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Communication, identity, skills, trust, economics, compliance. All CC BY 4.0.</p>
+    <p style="font-size:13px"><a href="/specs/">Browse specs →</a></p>
+  </div>
 
   <div class="card"><h2>FactBase</h2>
     <div class="endpoint"><span class="method">GET</span> <span class="path">/v1/facts?entity=python&category=env</span></div>
@@ -289,14 +263,6 @@ def home():
     <p style="font-size:12px;color:var(--muted);margin-top:8px">Bugs found by one agent, learned by all.</p>
   </div>
 
-  <div class="card"><h2>Blueprint Registry</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:4px">Verified LLM configurations, hardware-matched → <a href="https://workswithagents.io">workswithagents.io</a></p>
-  </div>
-
-  <div class="card"><h2>Ops & Monitoring</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:4px">Heartbeat, fleet health, and agent monitoring → <a href="https://bastiongateway.com">bastiongateway.com</a></p>
-  </div>
-
   <div class="card"><h2>Docs</h2>
     <p style="font-size:13px;margin-bottom:5px"><a href="/llms.txt">llms.txt</a> — AI agent documentation index</p>
     <p style="font-size:13px;margin-bottom:5px"><a href="/llms-full.txt">llms-full.txt</a> — Full docs in one file</p>
@@ -305,7 +271,7 @@ def home():
   </div>
 
   <div class="card">
-    <h2>🖥 On-Prem Knowledge Platform</h2>
+    <h2>On-Prem Knowledge Platform</h2>
     <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Run your own knowledge platform behind the firewall. Syncs facts, skills, and pitfalls from the public registry — your internal agents query local, stay air-gapped.</p>
     <div class="endpoint" style="margin-bottom:6px;overflow-x:auto;white-space:pre;font-size:11px">docker pull workswithagents/knowledge-platform:latest
 docker run -p 8499:8499 \\
@@ -313,11 +279,11 @@ docker run -p 8499:8499 \\
   -v ./skills:/app/skills \\
   -e SYNC_FROM=https://workswithagents.dev \\
   workswithagents/knowledge-platform</div>
-    <p style="font-size:12px;color:var(--muted);margin-top:8px">Enterprise support available. <a href="mailto:enterprise@workswithagents.com">Contact us →</a></p>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px">Enterprise support: <a href="mailto:enterprise@workswithagents.com">enterprise@workswithagents.com</a></p>
   </div>
 
   <footer>
-    <p>Works With Agents · <a href="https://workswithagents.com">Education</a> · <a href="https://workswithagents.io">Blueprints</a> · <a href="https://workswithagents.com/about.html">About</a> · © 2026</p>
+    <p>Works With Agents · <a href="/specs/">Specs</a> · <a href="/docs">API Docs</a> · © 2026</p>
   </footer>
 </div></body></html>"""
 
