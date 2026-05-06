@@ -12,8 +12,8 @@ from .identity import AgentIdentity
 from .compliance import ComplianceEngine
 from .onboarding import OnboardingClient
 from .iacp import IACPClient
-from .economics import AgentEconomics
-from .reputation import ReputationLedger
+from .economics import EconomicsClient
+from .reputation import ReputationClient
 from .coordination import CoordinationClient
 from .transaction import TransactionLedger
 from .fleet_insurance import FleetInsurance
@@ -26,8 +26,8 @@ __all__ = [
     "ComplianceEngine",
     "OnboardingClient",
     "IACPClient",
-    "AgentEconomics",
-    "ReputationLedger",
+    "EconomicsClient",
+    "ReputationClient",
     "CoordinationClient",
     "TransactionLedger",
     "FleetInsurance",
