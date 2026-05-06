@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standards — Works With Agents</title>
+<meta name="description" content="16 open specifications for AI agent interoperability — communication, identity, skills, economics, trust, and compliance. Submitted to IETF, CEN-CENELEC, BSI, IEEE, ISO, and NIST.">
+<meta property="og:title" content="Agent Standards — Works With Agents">
+<meta property="og:description" content="16 open specifications for AI agent interoperability. IACP, ASFS, Compliance-as-Code, and 13 more. CC BY 4.0.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://workswithagents.com/standards.html">
+<meta property="og:site_name" content="Works With Agents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent Standards — Works With Agents">
+<meta name="twitter:description" content="16 open specifications for AI agent interoperability. The agent-to-agent layer nobody has built yet.">
+<link rel="canonical" href="https://workswithagents.com/standards.html">
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+    --accent: #059669; --cta: #D97706; --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
+      --accent: #10B981; --cta: #F59E0B; --border: #334155;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px }
+  .logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none }
+  .logo span { color: var(--accent) }
+  .nav-links { display: flex; gap: 20px; align-items: center }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500 }
+  .nav-links a:hover { color: var(--text) }
+
+  .hero { text-align: center; padding: 20px 0 48px }
+  .hero .badge { display: inline-block; padding: 3px 12px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px }
+  .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px }
+  .hero h1 .t { color: var(--accent) }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 600px; margin: 0 auto }
+
+  .section { padding: 48px 0 }
+  .section h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px }
+  .section > p { color: var(--muted); font-size: 14px; margin-bottom: 24px; max-width: 640px }
+
+  .gap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-top: 20px }
+  .gap-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; box-shadow: var(--shadow) }
+  .gap-card .body-name { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 2px }
+  .gap-card p { font-size: 13px; color: var(--muted); line-height: 1.5 }
+
+  .priority-table { margin-top: 24px }
+  .priority-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border) }
+  .priority-row:last-child { border-bottom: none }
+  .priority-row .medal { font-size: 24px; flex-shrink: 0; width: 32px; text-align: center }
+  .priority-row .body { font-weight: 700; font-size: 13px; color: var(--accent); white-space: nowrap; min-width: 100px }
+  .priority-row .spec { font-weight: 600; font-size: 15px; margin-bottom: 2px }
+  .priority-row .why { font-size: 13px; color: var(--muted); line-height: 1.5 }
+
+  .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 10px; margin-top: 20px }
+  .spec-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; box-shadow: var(--shadow); border-left: 3px solid var(--accent) }
+  .spec-card .spec-name { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 3px }
+  .spec-card p { font-size: 13px; color: var(--muted); line-height: 1.5 }
+
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-top: 20px }
+  .why-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; box-shadow: var(--shadow) }
+  .why-card h4 { font-size: 14px; margin-bottom: 4px }
+  .why-card p { font-size: 13px; color: var(--muted); line-height: 1.5 }
+
+  .cta-block { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 20px }
+  .cta-block h3 { font-size: 20px; margin-bottom: 8px }
+  .cta-block p { font-size: 14px; color: var(--muted); max-width: 500px; margin: 0 auto 16px }
+  .cta-link { display: inline-block; padding: 10px 28px; background: var(--cta); color: #fff; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none }
+  .cta-link:hover { opacity: 0.9 }
+  .cta-note { font-size: 12px; color: var(--muted); margin-top: 12px }
+
+  footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px }
+  footer a { color: var(--accent); text-decoration: none }
+  footer a:hover { text-decoration: underline }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 16px }
+    .hero h1 { font-size: 26px }
+    .hero p { font-size: 14px }
+    nav { flex-direction: column; gap: 10px; margin-bottom: 32px }
+    .nav-links { flex-wrap: wrap; gap: 12px; justify-content: center }
+    .specs-grid { grid-template-columns: 1fr }
+    .priority-row { flex-wrap: wrap }
+    footer { font-size: 12px; padding: 28px 0 }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="/" class="logo">Works <span>With</span> Agents</a>
+  <div class="nav-links">
+    <a href="/#methodology">Methodology</a>
+    <a href="/standards.html">Standards</a>
+    <a href="https://workswithagents.io">Blueprints</a>
+    <a href="/about.html">About</a>
+    <a href="https://workswithagents.dev">API</a>
+    <a href="https://workswithagents.co.uk">UK</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">16 specifications published</div>
+  <h1>Agent <span class="t">Standards</span></h1>
+  <p>No standards body has published AI agent protocols. We're proposing the first — open, practical, and submission-ready.</p>
+</section>
+
+<section class="section">
+  <h2>The Gap</h2>
+  <p>Every major standards body has published AI guidelines. None address how agents talk to each other, verify identity, transfer skills, or build trust.</p>
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="body-name">ISO/IEC</div>
+      <p>18 AI standards — data quality, lifecycle, risk. Zero about agent-to-agent protocols.</p>
+    </div>
+    <div class="gap-card">
+      <div class="body-name">CEN-CENELEC</div>
+      <p>AI Act harmonised standards in development. All about human safety. No agent compliance automation.</p>
+    </div>
+    <div class="gap-card">
+      <div class="body-name">IEEE</div>
+      <p>7000-series for ethical AI. Nothing for agent skill formats or cross-platform interoperability.</p>
+    </div>
+    <div class="gap-card">
+      <div class="body-name">IETF</div>
+      <p>Zero AI agent RFCs. MCP is not an IETF standard. The agent communication layer is completely unbuilt.</p>
+    </div>
+    <div class="gap-card">
+      <div class="body-name">NIST</div>
+      <p>AI Risk Management Framework exists. No agent-specific profile. No agent identity verification.</p>
+    </div>
+    <div class="gap-card">
+      <div class="body-name">BSI</div>
+      <p>AI ethics PAS published. No agent identity or trust framework. UK-first opportunity unclaimed.</p>
+    </div>
+  </div>
+  <p style="margin-top:18px; font-size:13px; color:var(--muted)">Every body is focused on AI-for-humans. Nobody is doing AI-for-AI. That's the territory we're claiming.</p>
+</section>
+
+<section class="section">
+  <h2>Priority Submissions</h2>
+  <p>Six standards bodies, six specifications. Ordered by impact and barrier to submission.</p>
+  <div class="priority-table">
+    <div class="priority-row">
+      <div class="medal">🥇</div>
+      <div>
+        <div class="body">IETF</div>
+        <div class="spec">IACP — Inter-Agent Communication Protocol</div>
+        <div class="why">Internet-Draft for agent-to-agent messaging. Every agent that talks over the web uses it. Lowest barrier — individuals can submit Internet-Drafts directly.</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="medal">🥇</div>
+      <div>
+        <div class="body">CEN-CENELEC</div>
+        <div class="spec">Compliance-as-Code</div>
+        <div class="why">CEN Workshop Agreement for automated AI Act compliance verification. Mandatory for every AI agent deployed in the EU. First-mover advantage in a regulatory gap.</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="medal">🥈</div>
+      <div>
+        <div class="body">BSI</div>
+        <div class="spec">Agent Identity Protocol</div>
+        <div class="why">PAS for cryptographically verifiable agent identity. UK-first standard — then push to ISO globally. No agent identity standard exists anywhere.</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="medal">🥈</div>
+      <div>
+        <div class="body">IEEE</div>
+        <div class="spec">ASFS — Agent Skill Format Standard</div>
+        <div class="why">Cross-platform skill portability. Write a skill once, run it on any agent platform. IEEE's global reach makes this the default for enterprise procurement.</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="medal">🥉</div>
+      <div>
+        <div class="body">ISO</div>
+        <div class="spec">Agent Handoff Protocol</div>
+        <div class="why">New Work Item Proposal for standardised agent task transfer. 3–5 year global standard. The long game — ISO adoption means mandatory compliance in government procurement worldwide.</div>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="medal">🥉</div>
+      <div>
+        <div class="body">NIST</div>
+        <div class="spec">AI RMF Agent Profile</div>
+        <div class="why">Agent-specific extension to the AI Risk Management Framework. The path to US federal government adoption. Every gov contractor running agents will need this.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>All 16 Specifications</h2>
+  <p>Full specs at <a href="https://workswithagents.dev/specs/" style="color:var(--accent)">workswithagents.dev/specs/</a>. All CC BY 4.0 — free to use, adapt, and submit to standards bodies.</p>
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-name">🗣 IACP</div>
+      <p>Inter-Agent Communication Protocol. Standardised messaging, discovery, and handshake between agents across platforms.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">📦 ASFS</div>
+      <p>Agent Skill Format Standard. Write a skill once — run it on any agent platform. Frontmatter spec, validation rules, converter tooling.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">✅ Compliance-as-Code</div>
+      <p>Automated EU AI Act, NHS DTAC, GDPR, and FCA compliance verification. Machine-readable regulation packs.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🆔 Agent Identity Protocol</div>
+      <p>Cryptographically verifiable agent identity. DID-based. Cross-platform authentication without central authority.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🤝 Agent Handoff Protocol</div>
+      <p>Standardised task transfer between agents. State serialisation, capability matching, audit trails.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">💰 Agent Economics Protocol</div>
+      <p>Agent-to-agent service discovery, pricing, and payment. Token metering, SLA enforcement, marketplace mechanics.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">⭐ Reputation Ledger</div>
+      <p>Immutable agent performance history. Peer-reviewed outcomes, skill endorsements, trust accrual over time.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🛡 Trust Score Framework</div>
+      <p>Multi-factor agent trust scoring. Identity strength, performance history, compliance status, peer endorsements.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🏗 Fleet Insurance</div>
+      <p>Observability, resilience, and insurance mechanics for multi-agent deployments. Health monitoring, failover, coverage tiers.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">📡 Agent OSI Model</div>
+      <p>7-layer model for agent infrastructure — from physical compute through application. Maps to existing networking standards.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">📋 Capability Manifest</div>
+      <p>Machine-readable declaration of agent capabilities. Tools, models, skills, rate limits, safety constraints.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🔗 Coordination Protocol</div>
+      <p>Multi-agent task decomposition and coordination. Parallel workstreams, dependency resolution, merge strategies.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">⚖ SLA Framework</div>
+      <p>Standardised agent service level agreements. Uptime, latency, accuracy, and recourse — machine-readable and enforceable.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🚀 Deployment Manifest</div>
+      <p>One-file agent deployment specification. Hardware requirements, model configs, network needs, security policies.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">👋 Onboarding Protocol</div>
+      <p>Standardised agent registration across platforms. Identity bootstrap, capability announcement, credential exchange.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-name">🔁 Transaction Protocol</div>
+      <p>Atomic, auditable agent-to-agent transactions. Request, execution, verification, settlement — with rollback.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Why This Matters</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <h4>🔓 No Vendor Lock-In</h4>
+      <p>Standardised skills and communication mean agents work across platforms. Switch providers without rebuilding everything.</p>
+    </div>
+    <div class="why-card">
+      <h4>📋 Auditable Compliance</h4>
+      <p>Machine-readable regulation packs mean every agent action is verifiable against GDPR, NHS DTAC, EU AI Act, FCA rules.</p>
+    </div>
+    <div class="why-card">
+      <h4>🆔 Verifiable Identity</h4>
+      <p>Cryptographic agent identity means you know which agent did what — essential for regulated industries and enterprise procurement.</p>
+    </div>
+    <div class="why-card">
+      <h4>🔄 Portable Skills</h4>
+      <p>A skill built for one agent platform should work on any other. ASFS makes agent investments durable across the ecosystem.</p>
+    </div>
+    <div class="why-card">
+      <h4>🤝 Agent Economy</h4>
+      <p>Without standards, agents can't discover, pay, or rate each other. The agent-to-agent economy needs protocols to function.</p>
+    </div>
+    <div class="why-card">
+      <h4>🏛 Government-Ready</h4>
+      <p>NHS, MOD, HMRC procurement requires standards. Without them, AI agents stay locked out of the public sector.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-block">
+  <h3>These are proposals, not pronouncements</h3>
+  <p>We're submitting them to the bodies that matter. If you're building agent infrastructure, read the specs and get involved.</p>
+  <a href="https://workswithagents.dev/specs/" class="cta-link">Read the Specs →</a>
+  <p class="cta-note">All specifications CC BY 4.0. Pull requests welcome. <a href="https://workswithagents.io/badges/CERTIFICATION.md" style="color:var(--accent)">Certification criteria →</a></p>
+</div>
+
+<footer>
+  <p>Works With Agents · <a href="https://workswithagents.io">Blueprints</a> · <a href="https://workswithagents.dev">API</a> · <a href="https://workswithagents.co.uk">UK</a> · <a href="/about.html">About</a> · © 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

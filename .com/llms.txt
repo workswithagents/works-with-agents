@@ -39,6 +39,7 @@ Full course outline: [learn.html](https://workswithagents.com/learn.html)
 - [Home](https://workswithagents.com/) — Hero, methodology overview, 10-pattern grid
 - [Learn](https://workswithagents.com/learn.html) — Full course outline, all 10 modules
 - [Newsletter](https://workswithagents.com/newsletter.html) — Signup form
+- [Standards](https://workswithagents.com/standards.html) — 16 open AI agent specifications, submitted to 6 standards bodies
 - [Blog](https://workswithagents.com/blog/) — Practical writing on agentic methodology
 - [About](https://workswithagents.com/about.html) — Founders, mission
 - [Contact](https://workswithagents.com/contact.html) — Role-based emails, cross-domain links
