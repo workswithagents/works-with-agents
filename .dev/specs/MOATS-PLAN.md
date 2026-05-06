@@ -1,50 +1,69 @@
 # Works With Agents — Moats Execution Plan
 
-## Objective
+## Status: May 2026
 
-Claim 6 additional strategic moats in the AI agent infrastructure space. Write specifications, reference implementations in Python and TypeScript, agent adoption instructions, and publish announcement articles.
+16 specifications published. 8 SDK modules. 4 certification badges. Compliance Proxy running.
+2 GitHub proposals (Handoff Protocol: MCP SEP #2683, A2A #1817).
 
-## Moats
+## Built Moats (16)
 
-| # | Moat | Layer | Type | Revenue |
-|---|------|-------|------|---------|
-| 1 | Agent Trust Score | L3/L5 | Network effect | Freemium → Enterprise |
-| 2 | Deployment Manifest | Cross-layer | Standardization | Open source → Enterprise |
-| 3 | SLA Framework | L7 | Legal/Procurement | Consulting → Product |
-| 4 | Identity Protocol | L2/L3 | Security | Enterprise |
-| 5 | Compliance-as-Code | L7 | Regulatory capture | Direct product |
-| 6 | Onboarding Protocol | L1/L3 | Ecosystem lock-in | Platform |
+| # | Moat | Layer | Type | Status |
+|---|------|------|------|--------|
+| 1 | Agent OSI Model | Framework | Intellectual property | ✅ Published |
+| 2 | Onboarding Protocol | L1/L3 | Ecosystem lock-in | ✅ Spec + SDK |
+| 3 | Identity Protocol | L2/L3 | Security | ✅ Spec + SDK |
+| 4 | Agent Capability Manifest | L3 | Discovery | ✅ Spec |
+| 5 | Trust Score | L3/L5 | Network effect | ✅ Spec + SDK |
+| 6 | Handoff Protocol | L4 | Standardization | ✅ Spec + MCP/A2A proposals |
+| 7 | Coordination Protocol | L5 | Orchestration | ✅ Spec |
+| 8 | IACP — Inter-Agent Communication | L5 | Platform | ✅ Spec + ref client |
+| 9 | Deployment Manifest | Cross-layer | Standardization | ✅ Spec + SDK |
+| 10 | Compliance-as-Code | L7 | Regulatory capture | ✅ Spec + SDK + proxy |
+| 11 | Transaction Protocol | L7 | Governance | ✅ Spec |
+| 12 | SLA Framework | L7 | Legal/Procurement | ✅ Spec + SDK |
+| 13 | Agent Economics Protocol | L7 | Platform | ✅ Spec + ref client |
+| 14 | Reputation Ledger | Cross-layer | Network effect | ✅ Spec + ref client |
+| 15 | ASFS — Agent Skill Format Standard | Cross-framework | Ecosystem lock-in | ✅ Spec + converter |
+| 16 | Local-First Agent Certification | Cross-layer | Trust | ✅ Badges + criteria |
 
-## Execution Phases
+## Strategic Concepts
 
-### Phase 1 — Specs (now)
-Write all 6 specification documents. Each spec: purpose, design principles, schema, examples, relationship to OSI model.
+| # | Concept | Status |
+|---|---------|--------|
+| C1 | Agent Fleet Insurance | ✅ Exploration doc |
+| C2 | Independent Certification Body ("B Corp for Agents") | 🔜 Investigating |
 
-### Phase 2 — Reference Implementations
-Python libraries for each protocol. TypeScript libraries for key ones (Trust Score, Deployment Manifest, Identity). Minimal, copy-pasteable, zero-dependency where possible.
+## Services Built
 
-### Phase 3 — Agent Adoption Instructions
-Write AGENTS.md files and llms.txt entries that tell AI agents how to adopt each protocol. Include copy-pasteable config snippets. Make it trivially easy for an agent reading the spec to implement it.
+| Service | Type | Status |
+|---------|------|--------|
+| Compliance Proxy | Real-time DTAC/GDPR validator | ✅ v0.1.0-beta |
+| ASFS Converter | Hermes↔ASFS skill format | ✅ Working |
+| Blueprint Registry | Verified LLM configs | ✅ Live on .io |
+| Knowledge Platform | Facts, skills, pitfalls API | ✅ Live on .dev |
 
-### Phase 4 — Language SDKs
-Package Python libs for PyPI. Package TypeScript libs for npm. Provide one-command install + one-line usage for each.
+## SDK Coverage
 
-### Phase 5 — Distribution
-Publish dev.to article for each moat. Cross-link from OSI Model doc. Update llms.txt on all domains. Submit to relevant standards bodies where applicable.
+| Language | Modules | Package |
+|----------|---------|---------|
+| Python | 8 (trust_score, deployment, sla, identity, compliance, onboarding, asfs_convert, compliance_proxy) | `pip install workswithagents` |
+| TypeScript | 5 (TrustScore, DeploymentManifest, SLAMetrics, AgentIdentity, ComplianceEngine) + Onboarding, IACP client, Economics client, Reputation client | `npm install @workswithagents/agent-foundry` |
 
-## Success Criteria
+## Revenue Paths (All Coming Soon)
 
-- [ ] All 6 specs published at workswithagents.dev/specs/
-- [ ] All 6 specs discoverable via llms.txt
-- [ ] Python reference implementations for all 6
-- [ ] TypeScript reference implementations for Trust Score, Deployment Manifest, Identity
-- [ ] Agent adoption instructions in each spec
-- [ ] All 6 published to PyPI/npm
-- [ ] dev.to article for each moat
-- [ ] Each moat has an AGENTS.md entry telling agents how to use it
+| Moat | Revenue Model |
+|------|--------------|
+| Compliance Proxy | Per-agent/month + regulation pack licensing |
+| Certification (L3) | Annual certification fee per platform |
+| Blueprint Registry | Enterprise on-prem license |
+| Trust Score | Freemium → enterprise API |
+| Fleet Insurance | Commission on premiums (MGA model) |
+| Independent Cert Body | Accreditation fees + annual audits |
 
-## Timeline
+## Next Priority Actions
 
-Phase 1: Today
-Phase 2-3: Today
-Phase 4-5: Today
+1. **Launch Independent Certification Body framework** (#8 — investigating)
+2. Publish IACP to MCP/A2A as formal proposal
+3. Build Reputation Ledger SQLite reference implementation
+4. Add FCA regulation pack to Compliance Proxy
+5. First paying engagement (break the "0 clients" barrier)

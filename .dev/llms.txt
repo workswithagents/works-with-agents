@@ -1,10 +1,10 @@
-<!-- lastmod: 2026-05-05 -->
+<!-- lastmod: 2026-05-06 -->
 <!-- LANGUAGE: en (primary). Canonical: https://workswithagents.dev/llms.txt -->
 
 # Works With Agents — Knowledge Platform
 
-> Structured knowledge for AI agents. FactBase, Skill Registry, Pitfall Registry.
-> **Status:** Live. API at workswithagents.dev.
+> Structured knowledge for AI agents. FactBase, Skill Registry, Pitfall Registry, Specifications.
+> **Status:** Live. API at workswithagents.dev. 16 specifications published.
 > **Full reference:** [llms-full.txt](https://workswithagents.dev/llms-full.txt)
 > **OpenAPI:** [v1/openapi.json](https://workswithagents.dev/v1/openapi.json)
 
@@ -38,7 +38,7 @@ GET /v1/facts/stats
 ### Skills
 ```
 GET /v1/skills
-→ list all skills
+→ list all skills (ASFS-compatible)
 GET /v1/skills/{name}
 → skill metadata + full body
 ```
@@ -48,7 +48,7 @@ GET /v1/skills/{name}
 GET /v1/pitfalls?limit=100
 → query pitfall registry
 POST /v1/pitfalls
-→ report a bug (shared knowledge — bugs found by one, avoided by all)
+→ report a bug
 ```
 
 ### Newsletter
@@ -66,23 +66,58 @@ GET /v1/auth/{service}
 ## On-Prem Deployment
 
 Docker image: `workswithagents/knowledge-platform`
-Set `SYNC_FROM=https://workswithagents.dev` for periodic sync of facts, skills, pitfalls.
-Version endpoint enables efficient diff-based syncing.
-
+Set `SYNC_FROM=https://workswithagents.dev` for periodic sync.
 Enterprise support: enterprise@workswithagents.com
 
-## Specifications — Agent OSI Model
+## Specifications — Agent OSI Model (16 published)
 
-The 7-layer framework for agent infrastructure. Specifications at each layer:
+Framework:
+- [Agent OSI Model](https://workswithagents.dev/specs/agent-osi-model.md) — 7-layer framework
 
-- [Agent OSI Model](https://workswithagents.dev/specs/agent-osi-model.md) — Full framework (L1-L7)
-- [Agent Capability Manifest](https://workswithagents.dev/specs/capability-manifest.md) — L3 Discovery
-- [Handoff Protocol](https://workswithagents.dev/specs/handoff-protocol.md) — L4 Session (MCP SEP #2683, A2A #1817)
-- [Coordination Protocol](https://workswithagents.dev/specs/coordination-protocol.md) — L5 Coordination
-- [Transaction Protocol](https://workswithagents.dev/specs/transaction-protocol.md) — L7 Governance
+Cross-framework:
+- [ASFS — Agent Skill Format Standard](https://workswithagents.dev/specs/asfs.md) — Universal skill interchange
 
-All specs: [workswithagents.dev/specs/](https://workswithagents.dev/specs/index.md)
+Layer 1 (Hardware):
+- [Onboarding Protocol](https://workswithagents.dev/specs/onboarding-protocol.md)
+
+Layer 2-3 (Identity + Discovery):
+- [Identity Protocol](https://workswithagents.dev/specs/identity-protocol.md)
+- [Agent Capability Manifest](https://workswithagents.dev/specs/capability-manifest.md)
+- [Trust Score](https://workswithagents.dev/specs/trust-score.md)
+
+Layer 4 (Session):
+- [Handoff Protocol](https://workswithagents.dev/specs/handoff-protocol.md) — MCP SEP #2683, A2A #1817
+
+Layer 5 (Coordination):
+- [Coordination Protocol](https://workswithagents.dev/specs/coordination-protocol.md)
+- [IACP — Inter-Agent Communication](https://workswithagents.dev/specs/iacp.md)
+
+Cross-layer:
+- [Deployment Manifest](https://workswithagents.dev/specs/deployment-manifest.md)
+- [Reputation Ledger](https://workswithagents.dev/specs/reputation-ledger.md)
+
+Layer 7 (Governance):
+- [Transaction Protocol](https://workswithagents.dev/specs/transaction-protocol.md)
+- [SLA Framework](https://workswithagents.dev/specs/sla-framework.md)
+- [Compliance-as-Code](https://workswithagents.dev/specs/compliance-as-code.md)
+- [Agent Economics Protocol](https://workswithagents.dev/specs/agent-economics.md)
+
+Strategic concepts:
+- [Agent Fleet Insurance](https://workswithagents.dev/specs/fleet-insurance.md)
+
+All specs: [workswithagents.dev/specs/index.md](https://workswithagents.dev/specs/index.md)
 License: CC BY 4.0
+
+## SDKs
+
+- Python: `pip install workswithagents` (8 modules)
+- TypeScript: `npm install @workswithagents/agent-foundry` (5 modules)
+- Source: [github.com/workswithagents/works-with-agents](https://github.com/workswithagents/works-with-agents)
+
+## Certification
+
+- [Blueprint Registry](https://workswithagents.io) — Verified LLM configurations
+- [Certification Badges](https://workswithagents.io/badges/) — Blueprint, Ready, Certified, Local-First
 
 ## Ecosystem
 
