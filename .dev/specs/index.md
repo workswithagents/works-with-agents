@@ -22,11 +22,6 @@ Agent infrastructure specifications. Each spec addresses a specific layer of the
 | L7 — Governance | [Compliance-as-Code](compliance-as-code.md) | 1.0.0-draft | Specification |
 | L7 — Governance | [Agent Economics Protocol](agent-economics.md) | 1.0.0-draft | Specification |
 
-**Strategic Concepts (not protocol specs):**
-| Layer | Doc | Version |
-|-------|-----|---------|
-| L7 — Governance | [Agent Fleet Insurance](fleet-insurance.md) | 1.0.0-concept |
-
 ## SDK
 
 Python reference implementations: `pip install workswithagents`
@@ -42,7 +37,7 @@ TypeScript SDK: `npm install @workswithagents/agent-foundry`
 | `onboarding.py` | Onboarding Protocol |
 | `asfs_convert.py` | ASFS — Skill Format Converter |
 
-Source: [github.com/vystartasv/works-with-agents](https://github.com/vystartasv/works-with-agents)
+Source: [github.com/workswithagents/works-with-agents](https://github.com/workswithagents/works-with-agents)
 
 ## Quick Reference
 

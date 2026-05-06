@@ -7,6 +7,12 @@ set -e
 
 echo "=== Deploying Works With Agents + Bastion Gateway ==="
 
+# ── Pre-Deploy Scrub (BLOCKS if internal content found) ──────────────
+echo ""
+echo "--- Pre-Deploy Scrub ---"
+python3.11 ~/.hermes/scripts/pre-publish-scrub.py --strict
+echo ""
+
 # ── Static Sites (Cloudflare Pages) ──────────────────────────────────
 echo ""
 echo "--- Static Sites: Cloudflare Pages ---"
