@@ -223,6 +223,8 @@ def home():
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
     <a href="https://workswithagents.com">Education</a>
+    <a href="https://workswithagents.com/standards.html">Standards</a>
+    <a href="https://workswithagents.io">Blueprints</a>
     <a href="https://workswithagents.com/about.html">About</a>
     <a href="https://workswithagents.co.uk">UK</a>
     <a href="https://bastiongateway.com">Bastion</a>
@@ -278,7 +280,7 @@ docker run -p 8499:8499 \\
   </div>
 
   <footer>
-    <p>Works With Agents · <a href="https://workswithagents.com">Education</a> · <a href="https://workswithagents.com/about.html">About</a> · © 2026</p>
+    <p>Works With Agents · <a href="https://workswithagents.com">Education</a> · <a href="https://workswithagents.io">Blueprints</a> · <a href="https://workswithagents.com/about.html">About</a> · © 2026</p>
   </footer>
 </div></body></html>"""
 

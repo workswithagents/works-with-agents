@@ -392,9 +392,11 @@ def landing():
   <a href="/" class="logo">Works <span>With</span> Agents</a>
   <div class="nav-links">
     <a href="https://workswithagents.com">Education</a>
+    <a href="https://workswithagents.com/standards.html">Standards</a>
     <a href="https://workswithagents.com/about.html">About</a>
     <a href="https://workswithagents.dev">Knowledge API</a>
     <a href="https://workswithagents.co.uk">UK</a>
+    <a href="https://bastiongateway.com">Bastion</a>
   </div>
 </nav>
 
