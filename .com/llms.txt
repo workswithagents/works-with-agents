@@ -1,53 +1,11 @@
 <!-- lastmod: 2026-05-06 -->
-<!-- LANGUAGE: en (primary). Canonical: https://workswithagents.com/llms.txt -->
+<!-- All content has moved to workswithagents.dev — sole public portal -->
 
-# Works With Agents — Education
+# Works With Agents → workswithagents.dev
 
-> The missing manual for working with AI agents. 10 patterns from hands-on experimentation.
-> **Status:** Live. Courses, newsletter, and methodology at workswithagents.com.
-> **Full reference:** [llms-full.txt](https://workswithagents.com/llms-full.txt)
-> **Knowledge API:** [workswithagents.dev/llms.txt](https://workswithagents.dev/llms.txt)
-> **Blueprint Registry:** [workswithagents.io/llms.txt](https://workswithagents.io/llms.txt)
+This domain now redirects to [workswithagents.dev](https://workswithagents.dev) — the single portal for
+specifications, API docs, and SDKs.
 
-## What This Is
-
-Works With Agents teaches a 10-pattern methodology for working with AI agents as
-collaborators with memory, skills, and autonomous decision-making. Developed through
-hands-on experimentation — 3 days, patterns that emerged from autonomous
-agent-assisted development. The patterns that surfaced are now a structured methodology.
-
-**Founders:** Vilius Vystartas (technical, M365 developer) & Pelin Kayhan (business/compliance).
-Cardiff, UK.
-
-## The 10 Patterns
-
-1. **Boot** — First session setup. AGENTS.md, environment, initial memory.
-2. **Skills** — Reusable procedural knowledge. Build once, use forever.
-3. **Memory** — Persistent context across sessions. Never re-explain.
-4. **Decision Protocols** — Autonomy without chaos. When to ask, when to decide.
-5. **Tool Composition** — Right tool for each job. Terminal, files, web, delegation.
-6. **Orchestration** — Multi-agent workflows. Parallel streams, specialist agents.
-7. **Pipelines** — Agents that run while you sleep. Cron, builds, monitoring.
-8. **Resilience** — Never-stop loops. Retry with backoff. Self-healing.
-9. **Verify** — Trust but verify. Automated gates + human review.
-10. **Compounding** — Agents that get better. Discoveries → skills → forever.
-
-Full course outline: [learn.html](https://workswithagents.com/learn.html)
-
-## Site Pages
-
-- [Home](https://workswithagents.com/) — Hero, methodology overview, 10-pattern grid
-- [Learn](https://workswithagents.com/learn.html) — Full course outline, all 10 modules
-- [Newsletter](https://workswithagents.com/newsletter.html) — Signup form
-- [Standards](https://workswithagents.com/standards.html) — 16 open AI agent specifications, submitted to 6 standards bodies
-- [Blog](https://workswithagents.com/blog/) — Practical writing on agentic methodology
-- [About](https://workswithagents.com/about.html) — Founders, mission
-- [Contact](https://workswithagents.com/contact.html) — Role-based emails, cross-domain links
-
-## Ecosystem
-
-- **Education (.com):** This site — methodology, courses, newsletter
-- **UK Mirror (.co.uk):** Same content, UK-localised. [llms.txt](https://workswithagents.co.uk/llms.txt)
-- **Knowledge Platform (.dev):** FactBase, skill registry, pitfall registry. [API docs](https://workswithagents.dev/llms.txt)
-- **Blueprint Registry (.io):** Verified LLM configurations, hardware-matched. [llms.txt](https://workswithagents.io/llms.txt)
-- **Bastion Gateway:** On-prem infrastructure (license server, LLM proxy, fleet ops). [bastiongateway.com](https://bastiongateway.com)
+- **Specs:** [workswithagents.dev/specs/](https://workswithagents.dev/specs/)
+- **API:** [workswithagents.dev/v1/](https://workswithagents.dev/v1/)
+- **Full docs:** [workswithagents.dev/llms-full.txt](https://workswithagents.dev/llms-full.txt)

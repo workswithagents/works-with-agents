@@ -4,7 +4,7 @@
 # Works With Agents — Knowledge Platform
 
 > Structured knowledge for AI agents. FactBase, Skill Registry, Pitfall Registry, Specifications.
-> **Status:** Live. API at workswithagents.dev. 16 specifications published.
+> **Status:** Live. 15 specifications published.
 > **Full reference:** [llms-full.txt](https://workswithagents.dev/llms-full.txt)
 > **OpenAPI:** [v1/openapi.json](https://workswithagents.dev/v1/openapi.json)
 
@@ -69,7 +69,7 @@ Docker image: `workswithagents/knowledge-platform`
 Set `SYNC_FROM=https://workswithagents.dev` for periodic sync.
 Enterprise support: enterprise@workswithagents.com
 
-## Specifications — Agent OSI Model (16 published)
+## Specifications — Agent OSI Model (15 published)
 
 Framework:
 - [Agent OSI Model](https://workswithagents.dev/specs/agent-osi-model.md) — 7-layer framework
@@ -102,9 +102,6 @@ Layer 7 (Governance):
 - [Compliance-as-Code](https://workswithagents.dev/specs/compliance-as-code.md)
 - [Agent Economics Protocol](https://workswithagents.dev/specs/agent-economics.md)
 
-Strategic concepts:
-- [Agent Fleet Insurance](https://workswithagents.dev/specs/fleet-insurance.md)
-
 All specs: [workswithagents.dev/specs/index.md](https://workswithagents.dev/specs/index.md)
 License: CC BY 4.0
 
@@ -113,14 +110,3 @@ License: CC BY 4.0
 - Python: `pip install workswithagents` (8 modules)
 - TypeScript: `npm install @workswithagents/agent-foundry` (5 modules)
 - Source: [github.com/workswithagents/works-with-agents](https://github.com/workswithagents/works-with-agents)
-
-## Certification
-
-- [Blueprint Registry](https://workswithagents.io) — Verified LLM configurations
-- [Certification Badges](https://workswithagents.io/badges/) — Blueprint, Ready, Certified, Local-First
-
-## Ecosystem
-
-- **Education:** [workswithagents.com/llms.txt](https://workswithagents.com/llms.txt)
-- **Blueprint Registry:** [workswithagents.io/llms.txt](https://workswithagents.io/llms.txt)
-- **UK Mirror:** [workswithagents.co.uk/llms.txt](https://workswithagents.co.uk/llms.txt)

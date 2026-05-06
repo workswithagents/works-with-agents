@@ -1,50 +1,20 @@
 # Works With Agents
 
-**The Missing Manual for Working with AI Agents**
+**Open specifications and SDKs for AI agent interoperability.**
 
-We teach developers and engineering teams how to work with AI agents effectively — not as code generators, but as autonomous collaborators with memory, skills, and decision-making capability.
+15 protocol specifications — communication, identity, skills, trust, economics, compliance. CC BY 4.0. Single portal at [workswithagents.dev](https://workswithagents.dev).
 
-## The 10 Patterns
+## The Specs
 
-1. **Boot** — First session setup. AGENTS.md, environment, initial memory.
-2. **Skills** — Reusable procedural knowledge. Build once, use forever.
-3. **Memory** — Persistent context across sessions. Never re-explain.
-4. **Decision Protocols** — Autonomy without chaos. When to ask, when to decide.
-5. **Tool Composition** — Right tool for the job. Terminal, files, web, delegation.
-6. **Orchestration** — Multi-agent workflows. Parallel streams, specialist agents.
-7. **Pipelines** — Agents that run while you sleep. Cron, builds, monitoring.
-8. **Resilience** — Never-stop loops. Retry, backoff, self-healing.
-9. **Verify** — Trust but verify. Automated gates + human review.
-10. **Compounding** — Agents that get better. Discoveries → skills → forever.
+See [workswithagents.dev/specs/](https://workswithagents.dev/specs/) for the full index.
 
-## Products
+## SDKs
 
-Pricing TBD. Three tracks planned:
-
-- **Online Course** — 10 modules, self-paced, lifetime access
-- **Team Workshop** — 2-day intensive, hands-on with your team's projects
-- **Advisory Retainer** — Ongoing consulting, methodology audits, pipeline optimisation
-
-## What We Learned
-
-A weekend experiment with an AI agent produced 111 SPFx web parts. Not a product launch — a learning exercise that revealed the patterns. The methodology emerged from understanding what worked and what broke. [Read more →](docs/bastion-weekend.md)
-
-## Key Assets
-
-| Asset | Path |
-|-------|------|
-| Website (.com) | `.com/index.html` |
-| UK mirror (.co.uk) | `.co.uk/index.html` |
-| Knowledge API (.dev) | `.dev/api/main.py` |
-| Blueprint Registry (.io) | `.io/api/main.py` |
-| Course outline | `docs/COURSE-OUTLINE.md` |
-| Weekend experiment | `docs/bastion-weekend.md` |
-| Launch package | `docs/LAUNCH-PACKAGE.md` |
-| Market validation | `market-validation.md` |
-| Specs (16 published) | `specs/` |
-| Compliance docs | `compliance/` |
+- Python: `pip install workswithagents`
+- TypeScript: `npm install @workswithagents/agent-foundry`
+- Source: [github.com/workswithagents/works-with-agents](https://github.com/workswithagents/works-with-agents)
 
 ## Contact
 
-Vilius Vystartas — Technical, Cardiff
+Vilius Vystartas — Technical
 Pelin Kayhan — Business & Compliance
