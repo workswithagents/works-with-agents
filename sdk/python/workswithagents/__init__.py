@@ -14,6 +14,9 @@ from .onboarding import OnboardingClient
 from .iacp import IACPClient
 from .economics import AgentEconomics
 from .reputation import ReputationLedger
+from .coordination import CoordinationClient
+from .transaction import TransactionLedger
+from .fleet_insurance import FleetInsurance
 
 __all__ = [
     "TrustScoreClient",
@@ -25,4 +28,7 @@ __all__ = [
     "IACPClient",
     "AgentEconomics",
     "ReputationLedger",
+    "CoordinationClient",
+    "TransactionLedger",
+    "FleetInsurance",
 ]

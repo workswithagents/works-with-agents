@@ -4,6 +4,14 @@
  * Zero dependencies. Copy-pasteable. CC BY 4.0.
  */
 
+
+// Re-export from modular protocol files
+export { CoordinationClient, AgentRole } from "./coordination";
+export { TransactionLedger, TransactionStatus } from "./transaction";
+export { FleetInsurance } from "./fleet_insurance";
+export type { CoordinationMessage } from "./coordination";
+export type { Transaction, TransactionAction } from "./transaction";
+export type { RiskProfile, Policy, Claim } from "./fleet_insurance";
 const DEFAULT_API = "https://workswithagents.dev";
 
 async function request(method: string, path: string, data?: object): Promise<any> {
